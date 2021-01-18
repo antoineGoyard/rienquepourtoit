@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AdSupplement{% endblock %}
+
+{% block body %}
+    <h1>Edit AdSupplement</h1>
+
+    {{ include('ad_supplement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ad_supplement_index') }}">back to list</a>
+
+    {{ include('ad_supplement/_delete_form.html.twig') }}
+{% endblock %}

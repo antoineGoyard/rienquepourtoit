@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New AdSupplement{% endblock %}
+
+{% block body %}
+    <h1>Create new AdSupplement</h1>
+
+    {{ include('ad_supplement/_form.html.twig') }}
+
+    <a href="{{ path('ad_supplement_index') }}">back to list</a>
+{% endblock %}

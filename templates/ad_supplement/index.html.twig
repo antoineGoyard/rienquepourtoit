@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdSupplement index{% endblock %}
+
+{% block body %}
+    <h1>AdSupplement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Garden</th>
+                <th>Energy_class</th>
+                <th>Bathroom</th>
+                <th>Wc</th>
+                <th>Garage</th>
+                <th>Pool</th>
+                <th>Long_content</th>
+                <th>Rooms_number</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ad_supplement in ad_supplements %}
+            <tr>
+                <td>{{ ad_supplement.id }}</td>
+                <td>{{ ad_supplement.garden ? 'Yes' : 'No' }}</td>
+                <td>{{ ad_supplement.energyClass }}</td>
+                <td>{{ ad_supplement.bathroom }}</td>
+                <td>{{ ad_supplement.wc }}</td>
+                <td>{{ ad_supplement.garage ? 'Yes' : 'No' }}</td>
+                <td>{{ ad_supplement.pool ? 'Yes' : 'No' }}</td>
+                <td>{{ ad_supplement.longContent }}</td>
+                <td>{{ ad_supplement.roomsNumber }}</td>
+                <td>
+                    <a href="{{ path('ad_supplement_show', {'id': ad_supplement.id}) }}">show</a>
+                    <a href="{{ path('ad_supplement_edit', {'id': ad_supplement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ad_supplement_new') }}">Create new</a>
+{% endblock %}
