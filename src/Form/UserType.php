@@ -6,6 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Picture;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class UserType extends AbstractType
 {
@@ -13,11 +15,13 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('phone')
             ->add('pseudo')
-            ->add('picture')
+            ->add('picture', EntityType::class,[
+                'class'=>Picture::class,
+                'choice_label' => 'source',
+            ])
         ;
     }
 

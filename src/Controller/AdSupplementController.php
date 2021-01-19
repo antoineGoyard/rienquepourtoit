@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/ad/supplement")
+ * @Route("/ad-supplement")
  */
 class AdSupplementController extends AbstractController
 {

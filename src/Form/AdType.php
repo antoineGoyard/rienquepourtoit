@@ -6,6 +6,10 @@ use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\User;
+use App\Entity\AdSupplement;
+use App\Entity\HouseType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class AdType extends AbstractType
 {
@@ -23,9 +27,18 @@ class AdType extends AbstractType
             ->add('city')
             ->add('address')
             ->add('zip_code')
-            ->add('supplement')
-            ->add('house_type')
-            ->add('user')
+            ->add('supplement',EntityType::class,[
+                'class'=> AdSupplement::class,
+                'choice_label' => 'id',
+            ])
+            ->add('house_type',EntityType::class,[
+                'class'=> HouseType::class,
+                'choice_label' => 'name',
+            ])
+            ->add('user',EntityType::class,[
+                'class'=> User::class,
+                'choice_label' => 'pseudo',
+            ])
         ;
     }
 
