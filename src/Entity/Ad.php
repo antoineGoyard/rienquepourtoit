@@ -87,14 +87,14 @@ class Ad
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $zip_code;
-
-    /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="ad_picture")
      */
     private $pictures;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $published;
 
     public function __construct()
     {
@@ -262,17 +262,6 @@ class Ad
         return $this;
     }
 
-    public function getZipCode(): ?int
-    {
-        return $this->zip_code;
-    }
-
-    public function setZipCode(int $zip_code): self
-    {
-        $this->zip_code = $zip_code;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Picture[]
@@ -300,6 +289,18 @@ class Ad
                 $picture->setAdPicture(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(?bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }

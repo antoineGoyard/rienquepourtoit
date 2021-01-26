@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Form\AdSupplementType;
 use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,11 +28,6 @@ class AdType extends AbstractType
             ->add('created_at')
             ->add('city')
             ->add('address')
-            ->add('zip_code')
-            ->add('supplement',EntityType::class,[
-                'class'=> AdSupplement::class,
-                'choice_label' => 'id',
-            ])
             ->add('house_type',EntityType::class,[
                 'class'=> HouseType::class,
                 'choice_label' => 'name',
@@ -39,6 +36,7 @@ class AdType extends AbstractType
                 'class'=> User::class,
                 'choice_label' => 'pseudo',
             ])
+         
         ;
     }
 

@@ -35,11 +35,12 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $ad->setPublished(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ad);
             $entityManager->flush();
 
-            return $this->redirectToRoute('ad_index');
+            return $this->redirectToRoute('ad_supplement_new',['id'=> $ad->getId()]);
         }
 
         return $this->render('ad/new.html.twig', [

@@ -1,4 +1,27 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+  
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+{#
+  <div class="container">
+
+
+<form>
+<input type="text" name="lat" id="lat" size=12 value="">
+<input type="text" name="lon" id="lon" size=12 value="">
+</form>
+
+<b>Address Lookup</b>
+<div id="search">
+<input type="text" name="addr" value="" id="addr" size="58" />
+<button type="button" onclick="addr_search();">Search</button>
+<div id="results"></div>
+</div>
+
+<br />
+
+<div id="map"></div>
+
+</div>
+#}
