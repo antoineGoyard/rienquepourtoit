@@ -1,30 +1,74 @@
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-  
-    <button class="btn">
-        { button_label|default('Save') }}</button>
+
+ 
+    
+<div id='ad-form' class="form-row"> 
+
+        <div class="form-group col-sm-12 col-md-6 ">
+            {{ form_label(form.city)}}
+            {{ form_widget(form.city,{'action':path('location_search_city'),'method':'GET'})}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+             <label for="addr">Adresse</label>
+            <input type="text" name="addr" value="" id="addr" size="58" />
+            <button type="button" onclick="addr_search();">Search</button>
+        </div>
+
+        <div class="form-group col-sm-12 col-md-12">
+            <div id="results"></div>
+            <div id="map"></div>
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.price,'Prix')}}
+            {{ form_widget(form.price)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6 hidden ">
+            {{ form_label(form.longitude)}}
+            {{ form_widget(form.longitude)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6 hidden ">
+            {{ form_label(form.latitude)}}
+            {{ form_widget(form.latitude)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.pieces_number)}}
+            {{ form_widget(form.pieces_number)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.surface)}}
+            {{ form_widget(form.surface)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.ad_type)}}
+            {{ form_widget(form.ad_type)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.short_content)}}
+            {{ form_widget(form.short_content)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6 hidden">
+            {{ form_label(form.address)}}
+            {{ form_widget(form.address)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.house_type)}}
+            {{ form_widget(form.house_type)}}
+        </div>
+
+        
+    </div>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}
-
-{#
-  <div class="container">
-
-
-<form>
-<input type="text" name="lat" id="lat" size=12 value="">
-<input type="text" name="lon" id="lon" size=12 value="">
-</form>
-
-<b>Address Lookup</b>
-<div id="search">
-<input type="text" name="addr" value="" id="addr" size="58" />
-<button type="button" onclick="addr_search();">Search</button>
-<div id="results"></div>
-</div>
-
-<br />
-
-<div id="map"></div>
-
-</div>
-#}

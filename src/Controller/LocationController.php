@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,7 @@ class LocationController extends AbstractController
       
         $response = $client->request(
             'GET',
-            'https://geo.api.gouv.fr/communes?nom='.$name.'&fields=departement&boost=population&limit=5'
+            'https://geo.api.gouv.fr/communes?nom='.$name.'&fields=departement,centre&boost=population&limit=5'
         );
 
         $statusCode = $response->getStatusCode();

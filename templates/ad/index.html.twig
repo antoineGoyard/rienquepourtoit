@@ -38,7 +38,11 @@
                 <td>{{ ad.createdAt ? ad.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ ad.city }}</td>
                 <td>{{ ad.address }}</td>
-                <td>{{ ad.supplement.id }}</td>
+                {% if ad.supplement == null %}
+                    <td>Vide </td>
+                {% else %}
+                    <td>{{ ad.supplement.id }}</td>
+                {% endif %}
                 <td>{{ ad.published ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('ad_show', {'id': ad.id}) }}">show</a>

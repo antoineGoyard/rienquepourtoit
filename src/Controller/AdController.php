@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use DateTime;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
@@ -36,6 +38,8 @@ class AdController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $ad->setPublished(false);
+            $ad->setCreatedAt(new DateTime('now'));
+            $ad->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ad);
             $entityManager->flush();

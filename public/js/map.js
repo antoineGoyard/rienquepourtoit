@@ -7,8 +7,6 @@ var options = {
  zoom: 6
 }
 
-document.getElementById('lat').value = startlat;
-document.getElementById('lon').value = startlon;
 
 var map = L.map('map', options);
 var nzoom = 12;
@@ -23,26 +21,19 @@ console.log(myMarker);
  if(czoom < 18) { nzoom = czoom + 2; }
  if(nzoom > 18) { nzoom = 18; }
  if(czoom != 18) { map.setView([lat,lon], nzoom); } else { map.setView([lat,lon]); }
- document.getElementById('lat').value = lat;
- document.getElementById('lon').value = lon;
  myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
 });
 
 function chooseAddr(lat1, lng1, adre )
 {
-alert(adre);
  myMarker.closePopup();
  map.setView([lat1, lng1],18);
  myMarker.setLatLng([lat1, lng1]);
  lat = lat1.toFixed(8);
  lon = lng1.toFixed(8);
- document.getElementById('lat').value = lat;
  document.getElementById('ad_longitude').value = lng1;
  document.getElementById('ad_latitude').value = lat1;
  document.getElementById('ad_address').value = adre;
- alert(lat);
- alert(lon);
- document.getElementById('lon').value = lon;
  myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
 }
 
@@ -79,7 +70,6 @@ function addr_search()
    {
     var myArr = JSON.parse(this.responseText);
     myFunction(myArr);
-    console.log(myArr);
    }
  };
  xmlhttp.open("GET", url, true);
