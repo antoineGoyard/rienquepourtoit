@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use DateTime;
 use App\Entity\Ad;
+use App\Entity\Picture;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * @Route("/ad")
@@ -37,6 +40,28 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère le simages transmises
+            $pictures = $form->get('picture')->getData();
+            // boucle sur les pictures
+
+            foreach($pictures as $image){
+                //on génère un nouveau nom de fichier
+                $file = md5(uniqid()) . '.' . $image->guessExtension(); 
+
+                // on copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('pictures_directory'),
+                    $file
+                );
+
+                //on stock l'image dans la bdd(son nom)
+                $pict = new Picture();
+                $pict->setName($file);
+                $ad->addPicture($pict);
+
+            }
+
+
             $ad->setPublished(false);
             $ad->setCreatedAt(new DateTime('now'));
             $ad->setUser($this->getUser());
@@ -72,6 +97,28 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+             // on récupère le simages transmises
+             $pictures = $form->get('picture')->getData();
+             // boucle sur les pictures
+ 
+             foreach($pictures as $image){
+                 //on génère un nouveau nom de fichier
+                 $file = md5(uniqid()) . '.' . $image->guessExtension(); 
+ 
+                 // on copie le fichier dans le dossier uploads
+                 $image->move(
+                     $this->getParameter('pictures_directory'),
+                     $file
+                 );
+ 
+                 //on stock l'image dans la bdd(son nom)
+                 $pict = new Picture();
+                 $pict->setName($file);
+                 $ad->addPicture($pict);
+ 
+             }
+ 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('ad_index');
@@ -96,4 +143,33 @@ class AdController extends AbstractController
 
         return $this->redirectToRoute('ad_index');
     }
+
+    /**
+     * @Route("/delete/picture/{id}",name="ad_picture_delete", methods={"DELETE"})
+     */
+    public function deletePicture(Picture $picture, Request $request){
+        
+        $data = json_decode($request->getContent(), true);
+        // verifie token is valid
+
+
+        if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
+            //on recupère le nom de l'image
+            $name = $picture->getname();
+            //on supprime le fichier
+            unlink($this->getParameter('pictures_directory').'/'.$name);
+
+            //on supprimme de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($picture);
+            $em->flush();
+
+            //on répond json
+            return new JsonResponse(['success' => 1]);
+        }else{
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
+    }
+
+     
 }

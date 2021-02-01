@@ -16,30 +16,57 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', NumberType::class)
+            ->add('price', NumberType::class, [
+                'label' => 'Prix'
+                ])
+
             ->add('longitude')
+
             ->add('latitude')
-            ->add('pieces_number', NumberType::class)
-            ->add('surface', NumberType::class)
-            ->add('ad_type')
-            ->add('short_content',TextareaType::class, ['label' => 'Nom'])
+
+            ->add('pieces_number', NumberType::class, [
+                'label' => 'Nombre de Pièce'
+                ])
+
+            ->add('surface', NumberType::class, [
+                'label' => 'Surface'
+                ])
+
+            ->add('ad_type', ChoiceType::class,[
+                'label' => "Type d'annonce",
+                'choices'  =>[
+                    'vente' => "vente",
+                     'location' => "location",
+                    ],
+            ])
+            ->add('short_content',TextareaType::class,[
+                'label' => 'Description courte'
+                ])
+
             ->add('city', ChoiceType::class,[
+                'label' => "Ville de l'annonce ",
                 'attr' => ['class' => 'chosen-select '],
-                'choices'  => [
-                    'option1' => "option1",
-                ],])
+                'choices'  =>[
+                    '' => "",
+                    ],
+                ])
+
             ->add('address')
+
             ->add('house_type',EntityType::class,[
                 'class'=> HouseType::class,
                 'choice_label' => 'name',
+                'label' => 'Type de bien',
             ])
-            
+
+        
          
         ;
         $builder->get('city')->resetViewTransformers();

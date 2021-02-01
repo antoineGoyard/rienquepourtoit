@@ -87,7 +87,7 @@ class Ad
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="ad_picture")
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="ad_picture", cascade={"persist", "remove"})
      */
     private $pictures;
 

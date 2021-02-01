@@ -69,7 +69,7 @@ body{
     margin-left: 50px;
   }
   
-  @media only screen and (max-width: 600px) {
+  @media only all and (max-width: 600px) {
     .a-nav{
       font-size: 18px;
     }
@@ -79,7 +79,7 @@ body{
     
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only all and (max-width: 768px) {
     #ad-form{
       padding: 0 5% !important;
     }
@@ -129,7 +129,7 @@ body{
 
 #main-div{
   width: 100%;
-  height: 60vh;
+  height: 70vh;
   background-image: url(../img/main-div.jpg);
   background-position: center;
   background-size: cover;
@@ -147,4 +147,8 @@ body{
 {
   background-color: hotpink;
   padding: 0 20%;
+}
+
+.chosen-select{
+  width: 100%;
 }

@@ -42,7 +42,7 @@ class AdSupplementController extends AbstractController
             $entityManager->flush();
       
            
-            return $this->redirectToRoute('ad_supplement_index');
+            return $this->redirectToRoute('picture_new_ad',['id'=> $newAd->getId()]);
         }
 
         return $this->render('ad_supplement/new.html.twig', [

@@ -5,33 +5,44 @@
     
 <div id='ad-form' class="form-row"> 
 
-        <div class="form-group col-sm-12 col-md-6 ">
+     {% if app.request.attributes.get('_route') == 'ad_new' %}
+        <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.city)}}
             {{ form_widget(form.city,{'action':path('location_search_city'),'method':'GET'})}}
         </div>
+    
 
         <div class="form-group col-sm-12 col-md-6">
-             <label for="addr">Adresse</label>
-            <input type="text" name="addr" value="" id="addr" size="58" />
-            <button type="button" onclick="addr_search();">Search</button>
+            <label for="addr">Adresse</label>
+            <input class="form-control" type="text" name="addr" value="" id="addr" />
+            <button type="button" class=" btn btn-dark" onclick="addr_search();">Search</button>
         </div>
 
         <div class="form-group col-sm-12 col-md-12">
             <div id="results"></div>
             <div id="map"></div>
         </div>
+        {% else %}
+        
+           <div class="form-group col-sm-12 col-md-6 hidden">
+            {{ form_label(form.city)}}
+            {{ form_widget(form.city,{'action':path('location_search_city'),'method':'GET'})}}
+        </div>
+    {% endif %}
+
+      
 
         <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.price,'Prix')}}
             {{ form_widget(form.price)}}
         </div>
 
-        <div class="form-group col-sm-12 col-md-6 hidden ">
+        <div class="form-group col-sm-12 col-md-6  ">
             {{ form_label(form.longitude)}}
             {{ form_widget(form.longitude)}}
         </div>
 
-        <div class="form-group col-sm-12 col-md-6 hidden ">
+        <div class="form-group col-sm-12 col-md-6  ">
             {{ form_label(form.latitude)}}
             {{ form_widget(form.latitude)}}
         </div>
@@ -56,7 +67,7 @@
             {{ form_widget(form.short_content)}}
         </div>
 
-        <div class="form-group col-sm-12 col-md-6 hidden">
+        <div class="form-group col-sm-12 col-md-6 ">
             {{ form_label(form.address)}}
             {{ form_widget(form.address)}}
         </div>
@@ -66,9 +77,21 @@
             {{ form_widget(form.house_type)}}
         </div>
 
+        {% if app.request.attributes.get('_route') == 'ad_edit' %}
+            <h2> Images</h2>
+            {% for picture  in ad.pictures %}
+              <div>
+                <img src="{{ asset('/uploads/'~picture.name) }}" alt="" width="150">
+                {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
+                <a href="{{ path('ad_picture_delete', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">Supprimer</a>
+            </div>       
+            {% endfor %}
+        {% endif %}
+        {# verifier sir la route est "annonce_edit" #}
         
+        
+     <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
     </div>
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}
