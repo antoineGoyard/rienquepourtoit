@@ -40,26 +40,7 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // on récupère le simages transmises
-            $pictures = $form->get('picture')->getData();
-            // boucle sur les pictures
-
-            foreach($pictures as $image){
-                //on génère un nouveau nom de fichier
-                $file = md5(uniqid()) . '.' . $image->guessExtension(); 
-
-                // on copie le fichier dans le dossier uploads
-                $image->move(
-                    $this->getParameter('pictures_directory'),
-                    $file
-                );
-
-                //on stock l'image dans la bdd(son nom)
-                $pict = new Picture();
-                $pict->setName($file);
-                $ad->addPicture($pict);
-
-            }
+         
 
 
             $ad->setPublished(false);

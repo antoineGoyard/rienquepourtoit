@@ -1,5 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <h2 id="add" > <i class="fas fa-plus-circle add"></i></h2>
+    <div class="form-group col-sm-12 col-md-6 hidden">
+        {{ form_label(form.picture)}}
+        {{ form_widget(form.picture)}}
+    </div>
+
     {% if app.request.attributes.get('_route') == 'picture_new_ad' %}
             <h2> Images</h2>
             {% for picture  in newAd.pictures %}
@@ -10,6 +15,15 @@
             </div>       
             {% endfor %}
         {% endif %}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-        
+    
+    <button id="add1" class="btn hidden"> <i class="fas fa-plus-circle add"></i></button>
+    <a href="{{ path ('home') }}"><i class="fas fa-home add"></i></a>
+       
 {{ form_end(form) }}
+
+{% block javascripts %}
+
+    <script src= "{{asset('js/delete-picture.js')}}"></script>    
+    <script src= "{{asset('js/add-picture.js')}}"></script>  
+   
+{% endblock %}

@@ -44,7 +44,7 @@ $(function (){
 $(function(){
     $( '.chosen-select' ).on( 'change', function() {
         $('#ad_city').val( $( '.chosen-select' ).val() );
-       alert($('#ad_city').val());
+
     } );
 })
 

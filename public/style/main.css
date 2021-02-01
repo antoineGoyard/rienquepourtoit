@@ -174,4 +174,17 @@ hr {
 .chosen-select {
   width: 100%;
 }
+
+.add {
+  font-size: 40px;
+}
+
+.testimg {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 200px;
+  height: 200px;
+}
 /*# sourceMappingURL=main.css.map */
