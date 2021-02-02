@@ -7,6 +7,7 @@ use DateTime;
 use App\Entity\Ad;
 use App\Entity\Picture;
 use App\Form\AdType;
+use App\Form\AdEditType;
 use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,31 +75,11 @@ class AdController extends AbstractController
      */
     public function edit(Request $request, Ad $ad): Response
     {
-        $form = $this->createForm(AdType::class, $ad);
+        $form = $this->createForm(AdEditType::class, $ad);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-             // on récupère le simages transmises
-             $pictures = $form->get('picture')->getData();
-             // boucle sur les pictures
- 
-             foreach($pictures as $image){
-                 //on génère un nouveau nom de fichier
-                 $file = md5(uniqid()) . '.' . $image->guessExtension(); 
- 
-                 // on copie le fichier dans le dossier uploads
-                 $image->move(
-                     $this->getParameter('pictures_directory'),
-                     $file
-                 );
- 
-                 //on stock l'image dans la bdd(son nom)
-                 $pict = new Picture();
-                 $pict->setName($file);
-                 $ad->addPicture($pict);
- 
-             }
  
             $this->getDoctrine()->getManager()->flush();
 
@@ -117,9 +98,16 @@ class AdController extends AbstractController
     public function delete(Request $request, Ad $ad): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ad->getId(), $request->request->get('_token'))) {
+            
             $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ( $ad->getPictures() as $picture){
+                unlink($this->getParameter('pictures_directory').'/'.$picture->getName());
+            }
+
             $entityManager->remove($ad);
             $entityManager->flush();
+            
         }
 
         return $this->redirectToRoute('ad_index');

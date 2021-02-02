@@ -6,12 +6,12 @@
 <div id='ad-form' class="form-row"> 
 
      {% if app.request.attributes.get('_route') == 'ad_new' %}
+
         <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.city)}}
             {{ form_widget(form.city,{'action':path('location_search_city'),'method':'GET'})}}
         </div>
     
-
         <div class="form-group col-sm-12 col-md-6">
             <label for="addr">Adresse</label>
             <input class="form-control" type="text" name="addr" value="" id="addr" />
@@ -22,15 +22,6 @@
             <div id="results"></div>
             <div id="map"></div>
         </div>
-        {% else %}
-        
-           <div class="form-group col-sm-12 col-md-6 hidden">
-            {{ form_label(form.city)}}
-            {{ form_widget(form.city,{'action':path('location_search_city'),'method':'GET'})}}
-        </div>
-    {% endif %}
-
-      
 
         <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.price,'Prix')}}
@@ -77,7 +68,38 @@
             {{ form_widget(form.house_type)}}
         </div>
 
-        {% if app.request.attributes.get('_route') == 'ad_edit' %}
+    {% else %}
+    
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.price,'Prix')}}
+            {{ form_widget(form.price)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.pieces_number)}}
+            {{ form_widget(form.pieces_number)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.surface)}}
+            {{ form_widget(form.surface)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.ad_type)}}
+            {{ form_widget(form.ad_type)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.short_content)}}
+            {{ form_widget(form.short_content)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.house_type)}}
+            {{ form_widget(form.house_type)}}
+        </div>
+
             <h2> Images</h2>
             {% for picture  in ad.pictures %}
               <div>
@@ -85,10 +107,10 @@
                 {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
                 <a href="{{ path('ad_picture_delete', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">Supprimer</a>
             </div>       
-            {% endfor %}
-        {% endif %}
         {# verifier sir la route est "annonce_edit" #}
-        
+
+            {% endfor %}
+     {% endif %}
         
      <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
     </div>

@@ -68,6 +68,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $short_content;
 
@@ -88,6 +89,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="ad_picture", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $pictures;
 
