@@ -70,6 +70,8 @@ class AdController extends AbstractController
         ]);
     }
 
+    
+
     /**
      * @Route("/{id}/edit", name="ad_edit", methods={"GET","POST"})
      */
@@ -98,7 +100,7 @@ class AdController extends AbstractController
     public function delete(Request $request, Ad $ad): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ad->getId(), $request->request->get('_token'))) {
-            
+
             $entityManager = $this->getDoctrine()->getManager();
 
             foreach ( $ad->getPictures() as $picture){
@@ -140,5 +142,6 @@ class AdController extends AbstractController
         }
     }
 
+    
      
 }

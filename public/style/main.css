@@ -4,8 +4,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .sidenav {
@@ -60,7 +60,7 @@ hr {
 }
 
 .sidenav a:hover {
-  color: #CC2222;
+  color: #FF0C0C;
 }
 
 .sidenav .closebtn {
@@ -102,7 +102,7 @@ hr {
 }
 
 #search-main:hover {
-  color: #CC2222;
+  color: #FF0C0C;
 }
 
 #nav-front {
@@ -123,7 +123,7 @@ hr {
 }
 
 #nav-front span:hover {
-  color: #CC2222;
+  color: #FF0C0C;
 }
 
 .hidden {
@@ -152,7 +152,7 @@ hr {
 
 #map {
   width: 100%;
-  height: 300px;
+  height: 250px;
   padding: 0;
   margin: 0;
 }
@@ -184,7 +184,109 @@ hr {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-  width: 200px;
-  height: 200px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 30vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.sep {
+  color: red;
+}
+
+.card-title {
+  margin-top: .75rem;
+  color: #f0f0f0;
+}
+
+.card-text {
+  margin-bottom: .75rem;
+  color: #f0f0f0;
+  font-weight: bold;
+}
+
+.card-text:last-child {
+  margin-bottom: .75rem;
+}
+
+.card-body {
+  background-color: #212121;
+  z-index: 1;
+}
+
+.card {
+  border: none;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 5vh 5vw;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
+          box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
+  background-color: #212121;
+}
+
+.card-img-top {
+  z-index: 2;
+  border-radius: 20px;
+}
+
+.link-full-ad {
+  text-decoration: none;
+}
+
+.link-full-ad:hover {
+  text-decoration: none;
+}
+
+.carousel-picture {
+  width: 100%;
+  height: 60vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.ad-hr {
+  width: 50px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 10px 0 20px 0;
+  background-color: #FF0C0C;
+}
+
+.ad-h3 {
+  margin-top: 20px;
+}
+
+#ad-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin: 5px 0 5px 0;
+}
+
+#ad-info p {
+  margin: 5px 0 5px 0;
+  padding: 0;
+}
+
+.icon {
+  margin: 0;
+  font-size: 25px;
+  width: 40px;
+  color: #212121;
+  margin-right: 20px;
 }
 /*# sourceMappingURL=main.css.map */

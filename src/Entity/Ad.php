@@ -264,7 +264,6 @@ class Ad
         return $this;
     }
 
-
     /**
      * @return Collection|Picture[]
      */

@@ -1,13 +1,13 @@
 $primary-text-color: #f0f0f0;
-$select-text-color: #CC2222;
+$select-text-color: #FF0C0C;
 $primary-color: #212121;
 
 .alpha { color: $primary-color; }
 
 body{
   font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .sidenav {
     height: 100%;
@@ -139,7 +139,7 @@ body{
 
 .container { width:95%;max-width:980px;padding:1% 2%;margin:0 auto }
 #lat, #lon { text-align:right }
-#map { width:100%;height:300px;padding:0;margin:0; }
+#map { width:100%;height:250px;padding:0;margin:0; }
 .address { cursor:pointer }
 .address:hover { color:#AA0000;text-decoration:underline }
 
@@ -159,6 +159,96 @@ body{
 .testimg{
   object-fit: cover;
   object-position: center;
-  width: 200px;
-  height: 200px;
 }
+.card-img-top {
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sep{
+  color:red;
+}
+
+.card-title
+{
+  margin-top: .75rem;
+  color: #f0f0f0;
+}
+
+.card-text{
+  margin-bottom: .75rem;
+  color: #f0f0f0;
+  font-weight: bold;
+}
+
+.card-text:last-child{
+  margin-bottom: .75rem;
+}
+
+.card-body{
+  background-color: #212121;
+  z-index: 1;
+}
+
+.card{
+  border: none;
+
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 5vh 5vw;
+box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.22);
+background-color: #212121;
+}
+.card-img-top{
+  
+  z-index: 2;
+  border-radius: 20px; 
+}
+
+.link-full-ad{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+.carousel-picture{
+  width: 100%;
+  height: 60vh;
+  object-fit:cover;
+  object-position:center;
+}
+
+.ad-hr{
+  width: 50px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 10px 0 20px 0;
+  background-color: #FF0C0C;
+}
+
+.ad-h3{
+  margin-top: 20px;
+}
+
+#ad-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin:5px 0 5px 0;
+  p{
+    margin: 5px 0 5px 0;
+    padding: 0;
+  }
+}
+
+.icon{
+  margin:0;
+  font-size:25px;
+  width:40px;
+  color: #212121;
+  margin-right: 20px;
+}
+
