@@ -19,7 +19,8 @@
                 <th>Created_at</th>
                 <th>City</th>
                 <th>Address</th>
-                <th>Zip_code</th>
+                <th>supplementid</th>
+                <th>published</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -37,7 +38,12 @@
                 <td>{{ ad.createdAt ? ad.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ ad.city }}</td>
                 <td>{{ ad.address }}</td>
-                <td>{{ ad.zipCode }}</td>
+                {% if ad.supplement == null %}
+                    <td>Vide </td>
+                {% else %}
+                    <td>{{ ad.supplement.id }}</td>
+                {% endif %}
+                <td>{{ ad.published ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('ad_show', {'id': ad.id}) }}">show</a>
                     <a href="{{ path('ad_edit', {'id': ad.id}) }}">edit</a>

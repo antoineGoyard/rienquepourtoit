@@ -20,7 +20,7 @@ class Picture
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $source;
+    private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Ad::class, inversedBy="pictures")
@@ -37,14 +37,14 @@ class Picture
         return $this->id;
     }
 
-    public function getSource(): ?string
+    public function getName(): ?string
     {
-        return $this->source;
+        return $this->name;
     }
 
-    public function setSource(string $source): self
+    public function setName(string $name): self
     {
-        $this->source = $source;
+        $this->name = $name;
 
         return $this;
     }

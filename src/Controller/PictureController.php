@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ad;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
@@ -26,9 +27,48 @@ class PictureController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="picture_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="picture_new_ad", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function newAd(Request $request,Ad $newAd): Response
+    {
+        $picture = new Picture();
+        $form = $this->createForm(PictureType::class, $picture);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $pic = $form->get('picture')->getData();
+
+            $file= md5(uniqid()).'.'.$pic->guessExtension();
+
+            $pic->move(
+                $this->getParameter('pictures_directory'),
+                $file
+            );
+
+            $picture->setAdPicture($newAd);
+            $picture->setName($file);
+            $newAd->addPicture($picture);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($picture);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('picture_new_ad',['id'=> $newAd->getId()]);
+        }
+
+        return $this->render('picture/new.html.twig', [
+            'picture' => $picture,
+            'form' => $form->createView(),
+            'newAd' => $newAd,
+        ]);
+    }
+
+
+    /**
+     * @Route("/new", name="picture_new_user", methods={"GET","POST"})
+     */
+    public function newUser(Request $request): Response
     {
         $picture = new Picture();
         $form = $this->createForm(PictureType::class, $picture);
@@ -47,6 +87,7 @@ class PictureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/{id}", name="picture_show", methods={"GET"})

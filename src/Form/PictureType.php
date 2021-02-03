@@ -6,15 +6,19 @@ use App\Entity\Picture;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('source')
-            ->add('ad_picture')
-            ->add('user_picture')
+            //ajout images 
+            ->add('picture', FileType::class,[
+                'label' => 'Photos annonce',
+                'mapped' => false,
+                'required' => false
+            ])
         ;
     }
 

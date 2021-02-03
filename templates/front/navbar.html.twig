@@ -1,0 +1,38 @@
+<div id="mySidenav" class="sidenav">
+
+  <div id="back-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fas fa-times"></i></a>
+  </div>
+
+
+  {% if app.user == null %}
+    <a class="a-nav" href="{{ path ('app_login') }}"><i class="fas fa-sign-in-alt"></i>Se connecter</a>
+    <a class="a-nav" href="{{ path ('app_register') }}"><i class="fas fa-file-signature"></i>S'enregistrer</a>
+
+  {% elseif app.user.roles[0] == 'ROLE_USER' %}
+    <a class ="a-nav" href="#"><i class="fas fa-user-alt"></i>Mon compte</a>
+    <a class ="a-nav"  href="#"><i class="fas fa-calendar-alt"></i>Visite(s)</a>
+    <a class ="a-nav" href="#"><i class="fas fa-envelope"></i>Message(s)</a>
+    <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
+    <a class ="a-nav" href="#"><i class="fas fa-search"></i>Recherche</a>
+    <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
+
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <a class ="a-nav-lm" href="#">Mentions légales</a>
+    <a class ="a-nav-lm" href="#">Conditions générales</a>
+    <a class ="a-nav-lm" href="#">Politique de confidentialité</a>
+
+  {% elseif app.user.roles[0] == 'ROLE_MODERATOR' %}
+    
+    <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
+    <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
+  {% endif %}
+
+
+</div>
+
+<nav id="nav-front"class="navbar navbar-dark bg-dark">
+  <span id="burger" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+  <h1>rienquepourtoit</h1>
+  <a  href="#"><i id ="search-main"class="fas fa-search"></i>Rechercher</a>
+</nav>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ad;
 use App\Entity\AdSupplement;
 use App\Form\AdSupplementType;
 use App\Repository\AdSupplementRepository;
@@ -26,9 +27,9 @@ class AdSupplementController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="ad_supplement_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="ad_supplement_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Ad $newAd): Response
     {
         $adSupplement = new AdSupplement();
         $form = $this->createForm(AdSupplementType::class, $adSupplement);
@@ -36,10 +37,12 @@ class AdSupplementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $newAd->setSupplement($adSupplement);
             $entityManager->persist($adSupplement);
             $entityManager->flush();
-
-            return $this->redirectToRoute('ad_supplement_index');
+      
+           
+            return $this->redirectToRoute('picture_new_ad',['id'=> $newAd->getId()]);
         }
 
         return $this->render('ad_supplement/new.html.twig', [

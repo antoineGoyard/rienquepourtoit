@@ -2,13 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use DateTime;
 use App\Entity\Ad;
+use App\Entity\Picture;
 use App\Form\AdType;
+use App\Form\AdEditType;
 use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * @Route("/ad")
@@ -35,11 +41,17 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+         
+
+
+            $ad->setPublished(false);
+            $ad->setCreatedAt(new DateTime('now'));
+            $ad->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ad);
             $entityManager->flush();
 
-            return $this->redirectToRoute('ad_index');
+            return $this->redirectToRoute('ad_supplement_new',['id'=> $ad->getId()]);
         }
 
         return $this->render('ad/new.html.twig', [
@@ -63,10 +75,12 @@ class AdController extends AbstractController
      */
     public function edit(Request $request, Ad $ad): Response
     {
-        $form = $this->createForm(AdType::class, $ad);
+        $form = $this->createForm(AdEditType::class, $ad);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+ 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('ad_index');
@@ -84,11 +98,47 @@ class AdController extends AbstractController
     public function delete(Request $request, Ad $ad): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ad->getId(), $request->request->get('_token'))) {
+            
             $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ( $ad->getPictures() as $picture){
+                unlink($this->getParameter('pictures_directory').'/'.$picture->getName());
+            }
+
             $entityManager->remove($ad);
             $entityManager->flush();
+            
         }
 
         return $this->redirectToRoute('ad_index');
     }
+
+    /**
+     * @Route("/delete/picture/{id}",name="ad_picture_delete", methods={"DELETE"})
+     */
+    public function deletePicture(Picture $picture, Request $request){
+        
+        $data = json_decode($request->getContent(), true);
+        // verifie token is valid
+
+
+        if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
+            //on recupère le nom de l'image
+            $name = $picture->getname();
+            //on supprime le fichier
+            unlink($this->getParameter('pictures_directory').'/'.$name);
+
+            //on supprimme de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($picture);
+            $em->flush();
+
+            //on répond json
+            return new JsonResponse(['success' => 1]);
+        }else{
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
+    }
+
+     
 }
