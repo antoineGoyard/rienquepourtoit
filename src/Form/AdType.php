@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\User;
 use App\Entity\AdSupplement;
 use App\Entity\HouseType;
+use App\Entity\City;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -50,13 +51,13 @@ class AdType extends AbstractType
                 'label' => 'Description courte'
                 ])
 
-            ->add('city', ChoiceType::class,[
-                'label' => "Ville de l'annonce ",
-                'attr' => ['class' => 'chosen-select '],
-                'choices'  =>[
-                    '' => "",
-                    ],
-                ])
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'name',
+                'label' => "Ville de l'annonce : ",
+                'placeholder' => 'placeholder',
+                'mapped' => false,
+            ])
 
             ->add('address')
 
@@ -65,9 +66,6 @@ class AdType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Type de bien',
             ])
-
-        
-         
         ;
         $builder->get('city')->resetViewTransformers();
     }

@@ -137,6 +137,7 @@ hr {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .container {
@@ -255,12 +256,12 @@ hr {
   width: 50px;
   height: 10px;
   border-radius: 10px;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 30px 0;
   background-color: #FF0C0C;
 }
 
 .ad-h3 {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #ad-info {
@@ -288,5 +289,16 @@ hr {
   width: 40px;
   color: #212121;
   margin-right: 20px;
+}
+
+#main-div-form {
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 60%;
+  height: 80%;
 }
 /*# sourceMappingURL=main.css.map */

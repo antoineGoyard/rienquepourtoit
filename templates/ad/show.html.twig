@@ -59,11 +59,36 @@
 
     <h3 class="ad-h3">Description du bien</h3>
     <hr class="ad-hr">
-        <p>{{ad.supplement.longContent}}</p>
+        <p>{{ad.supplement.longContent|nl2br}}</p>
 
     <h3 class="ad-h3">Complement</h3>
     <hr class="ad-hr">
-    <p></p>
+        {% if ad.supplement.garden == true %}
+            <p><i class="fas fa-tree icon"></i>Dispose d'un jardin</p>
+        {% endif %}
+
+         {% if ad.supplement.energyClass != null %}
+            <p><i class="fas fa-bolt icon"></i>Classe énergétique : {{ad.supplement.energyClass}}</p>
+        {% endif %}
+
+        {% if ad.supplement.bathroom != null %}
+            <p><i class="fas fa-bath icon "></i>{{ad.supplement.bathroom~' Salle(s) de bains '}}</p>
+        {% endif %}
+
+         {% if ad.supplement.wc != null %}
+            <p><i class="fas fa-toilet icon "></i>{{ad.supplement.wc~' toilettes '}}</p>
+        {% endif %}
+
+        {% if ad.supplement.garage == true %}
+            <p><i class="fas fa-warehouse icon"></i>Dispose d'un stationnement pour voiture</p>
+        {% endif %}
+
+        {% if ad.supplement.pool == true %}
+            <p><i class="fas fa-swimming-pool icon"></i>Dispose d'une piscine</p>
+        {% endif %}
+
+        
+        
 
     <h3 class="ad-h3">Contact</h3>
     <hr class="ad-hr">

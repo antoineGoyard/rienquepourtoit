@@ -1,1 +1,1 @@
-$(".chosen-select").chosen({max_selected_options: 5});
+$(".chosen-select").chosen({max_shown_results: 5});

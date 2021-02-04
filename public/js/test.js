@@ -12,7 +12,7 @@
 })
 */
 
-
+/*
 $(function (){
     var timeout = null;
     $('.chosen-search-input').on('keyup', function() {
@@ -36,15 +36,6 @@ $(function (){
     });
 
 })
+*/
 
-
-
-
-
-$(function(){
-    $( '.chosen-select' ).on( 'change', function() {
-        $('#ad_city').val( $( '.chosen-select' ).val() );
-
-    } );
-})
 

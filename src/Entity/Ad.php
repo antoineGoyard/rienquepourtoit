@@ -80,11 +80,6 @@ class Ad
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $address;
 
     /**
@@ -97,6 +92,14 @@ class Ad
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $published;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="ads")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+   
 
     public function __construct()
     {
@@ -240,18 +243,7 @@ class Ad
         return $this;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
+  
     public function getAddress(): ?string
     {
         return $this->address;
@@ -305,4 +297,18 @@ class Ad
 
         return $this;
     }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+ 
 }

@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\City;
 use DateTime;
 use App\Entity\Ad;
 use App\Entity\Picture;
 use App\Form\AdType;
 use App\Form\AdEditType;
 use App\Repository\AdRepository;
+use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,17 +36,19 @@ class AdController extends AbstractController
     /**
      * @Route("/new", name="ad_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,CityRepository $cityRepository): Response
     {
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
-        $form->handleRequest($request);
+        $form->handleRequest($request);   
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
-         
-
-
             $ad->setPublished(false);
+
+            $city = $cityRepository->findOneBy(['id'=>$form->get('city')->getData()]);
+            $ad->setCity( $city);
+
             $ad->setCreatedAt(new DateTime('now'));
             $ad->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();

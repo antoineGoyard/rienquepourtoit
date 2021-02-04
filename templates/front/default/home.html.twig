@@ -5,6 +5,20 @@
 
 {% block body %}
     <div id="main-div">
+        <div id="main-div-form" class="container" >
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Appartement
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2">
+                    Maison
+                </label>
+            </div>
+        </div>
     </div>
     
     <div class="container">
@@ -17,7 +31,7 @@
                             <div class="col">
                                 <h5 class="card-title">{{ad.houseType.name~' '}}<span class="sep" >&#x2022;</span>{{' '~ad.piecesNumber~' pièce(s) '}}<span class="sep" >&#x2022;</span>{{' '~ad.surface~'m²'}}</h5>
                                 <p class="card-text">{{ad.price~'€'}}{% if ad.adType == 'location' %}/mois{% endif %}</p>
-                                <p class="card-text">{{ad.city}}</p>
+                                <p class="card-text">{{ad.city.name}}</p>
                             </div>
                             <div class="col">
                                 <p class="card-text">{{ad.shortContent}}</p>
