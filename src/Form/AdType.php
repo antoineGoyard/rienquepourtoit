@@ -2,22 +2,17 @@
 
 namespace App\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use App\Form\AdSupplementType;
 use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\User;
-use App\Entity\AdSupplement;
 use App\Entity\HouseType;
 use App\Entity\City;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class AdType extends AbstractType
 {
@@ -54,9 +49,9 @@ class AdType extends AbstractType
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'name',
+                'attr'=>['class'=>'chosen-select'],
                 'label' => "Ville de l'annonce : ",
                 'placeholder' => 'placeholder',
-                'mapped' => false,
             ])
 
             ->add('address')
@@ -67,7 +62,6 @@ class AdType extends AbstractType
                 'label' => 'Type de bien',
             ])
         ;
-        $builder->get('city')->resetViewTransformers();
     }
 
     public function configureOptions(OptionsResolver $resolver)

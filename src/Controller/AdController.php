@@ -40,15 +40,15 @@ class AdController extends AbstractController
     {
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
+        
         $form->handleRequest($request);   
+      
 
         
         if ($form->isSubmitted() && $form->isValid()) {
             $ad->setPublished(false);
 
-            $city = $cityRepository->findOneBy(['id'=>$form->get('city')->getData()]);
-            $ad->setCity( $city);
-
+          
             $ad->setCreatedAt(new DateTime('now'));
             $ad->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
@@ -62,6 +62,23 @@ class AdController extends AbstractController
             'ad' => $ad,
             'form' => $form->createView(),
         ]);
+    }
+
+      /**
+     * @Route("/search", name="ad_search", methods={"GET"})
+     */
+    public function search(Request $request,AdRepository $adRepository): Response
+    {
+
+        $minPrice = $request->get('minPrice');
+        $maxPrice = $request->get('maxPrice');
+        $adType = $request->get('ad-type');
+        $adCity = $request->get('city');
+
+        return $this->render('ad/search.html.twig', [
+            'ads' => $adRepository->findBySearch($adType,$maxPrice,$minPrice,$adCity),
+        ]);
+     
     }
 
     /**
@@ -145,6 +162,9 @@ class AdController extends AbstractController
             return new JsonResponse(['error' => 'Token Invalide'], 400);
         }
     }
+
+
+  
 
     
      

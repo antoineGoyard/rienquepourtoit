@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\AbstractQuery;
 use App\Entity\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +20,16 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
+    public function findByName(string $name)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.name LIKE :name')
+            ->setParameter('name', $name . '%')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_ARRAY)
+        ;
+    }
     // /**
     //  * @return City[] Returns an array of City objects
     //  */

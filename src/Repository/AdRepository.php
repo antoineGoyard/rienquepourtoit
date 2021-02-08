@@ -49,4 +49,20 @@ class AdRepository extends ServiceEntityRepository
     }
     */
 
+    public function findBySearch($type,$max,$min,$city)
+    {
+        return $this->createQueryBuilder('ad')
+        ->join('ad.city','c')
+        ->join('ad.house_type', 'h')
+        ->where('h.name = :type')
+        ->andWhere('ad.price <= :maxPrice','ad.price >= :minPrice','c.id =:city')
+        ->setParameter('minPrice', $min)
+        ->setParameter('maxPrice', $max)
+        ->setParameter('type', $type)
+        ->setParameter('city', $city)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

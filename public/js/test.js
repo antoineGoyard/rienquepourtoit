@@ -26,7 +26,7 @@ $(function (){
                 
                 articles.forEach(function (article){
                     console.log(article);
-                    $('.chosen-select').append("<option class='test1' value='"+ article.nom+"'>"+ article.nom+"</option>");
+                   
                 
                 });
                 $('.chosen-select').trigger("chosen:updated");
@@ -34,8 +34,21 @@ $(function (){
         }, 1500);
 
     });
-
 })
 */
 
+$(function (){
 
+    $(document).on('keyup', '.bs-searchbox input', function (e) {
+      
+        var searchData = e.target.value;
+        $.get('/city/search?name=' + searchData, function (cities){
+            $("#select-city option:not(:first)").remove();
+            cities.forEach(function (city){
+                $('#select-city').append('<option value="'+city.id+'">'+city.name+'</option>');
+                $("#select-city").val(city.name)
+            });
+            $("#select-city").selectpicker("refresh");
+        });
+    });
+})
