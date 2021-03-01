@@ -40,7 +40,6 @@ class AdController extends AbstractController
     {
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
-        
         $form->handleRequest($request);   
       
 
@@ -48,7 +47,9 @@ class AdController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $ad->setPublished(false);
 
-          
+            $city = $cityRepository->findOneBy(['id'=>$form->get('city')->getData()]);
+            $ad->setCity( $city);
+            
             $ad->setCreatedAt(new DateTime('now'));
             $ad->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();

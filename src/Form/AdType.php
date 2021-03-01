@@ -46,12 +46,12 @@ class AdType extends AbstractType
                 'label' => 'Description courte'
                 ])
 
-            ->add('city', EntityType::class, [
-                'class' => City::class,
+            ->add('city', ChoiceType::class, [
                 'choice_label' => 'name',
-                'attr'=>['class'=>'chosen-select'],
+                'attr'=>['class'=>'selectpicker','data-live-search' => true],
                 'label' => "Ville de l'annonce : ",
                 'placeholder' => 'placeholder',
+                'mapped' => false,
             ])
 
             ->add('address')
@@ -62,6 +62,7 @@ class AdType extends AbstractType
                 'label' => 'Type de bien',
             ])
         ;
+        $builder->get('city')->resetViewTransformers();
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -7,36 +7,42 @@
     <div id="main-div">
         <div id="main-div-form" class="container" >
         <form action="{{ path ('ad_search') }}" method="GET">
-            <div class="form-group">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="ad-type" id="appartement" value="Appartement" checked>
-                    <label class="form-check-label" for="exampleRadios1">
-                        Appartement
+            <div class="form-group text-center">
+            
+                <h3 class="homeForm">Recherche rapide</h3>
+                <div class="btn-group btn-group-toggle col-md-12 homeForm" data-toggle="buttons">
+                    <label class="btn btn-danger col-md-6">
+                        <input type="radio" name="adType" autocomplete="off" value="vente"> Achat
+                    </label>
+                    <label class="btn btn-danger active col-md-6">
+                        <input type="radio" name="adType" autocomplete="off" value="location" checked> Location
                     </label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="ad-type" id="maison" value="Maison">
-                    <label class="form-check-label" for="exampleRadios2">
-                        Maison
+
+                <div class="btn-group btn-group-toggle col-md-12 homeForm" data-toggle="buttons">
+                    <label class="btn btn-danger  col-md-6 ">
+                        <input type="radio" name="adHouseType" autocomplete="off" value="Appartement"> Appartement
+                    </label>
+                    <label class="btn btn-danger active col-md-6">
+                        <input type="radio" name="adHouseType" autocomplete="off" value="Maison" checked> Maison
                     </label>
                 </div>
-                <form>
 
-                <div class="form-row">
+
+                <div class="form-row homeForm" >
                     <div class="col">
-                    <input type="number" class="form-control" placeholder="prix minimum" name="minPrice">
+                    <input type="number" class="form-control" placeholder="prix minimum" name="minPrice" required>
                     </div>
                     <div class="col">
-                    <input type="number" class="form-control" placeholder="Prix maximum" name="maxPrice">
+                    <input type="number" class="form-control" placeholder="Prix maximum" name="maxPrice" required>
                     </div>
                 </div>
 
-                <label for="exampleFormControlSelect1">Example select</label>
-                    <select class="form-control selectpicker" id="select-city" data-live-search="true" name="city" >
-                       <option value="" disabled selected>Select your option</option>
+                <select class="form-control selectpicker homeForm" id="select-city" data-live-search="true" name="city" required >
+                       <option value="" disabled selected>Choisir une ville</option>
                 </select>
-                 <button type="submit" class="btn btn-primary">Sign in</button>
+                 <button type="submit" class="btn btn-danger homeForm">Rechercher</button>
 
             </div>
         </form>
@@ -44,6 +50,8 @@
     </div>
     
     <div class="container">
+    <h3 class="ad-h3-home" >Dernières annonces</h3>
+    <hr class="ad-hr-home">
         {% for ad in ads %}  
             <a class="link-full-ad" href="{{ path('ad_show', {'id': ad.id}) }}">
                 <div class="card ">
@@ -67,7 +75,9 @@
 
 {% endblock %}
 
+{% block javascript %}
 
+{% endblock %}
 {#
 {{ad.createdAt|date('Y-m-d')}}
   <div class="w-100"></div>

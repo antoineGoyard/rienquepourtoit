@@ -38,7 +38,6 @@ $(function (){
 */
 
 $(function (){
-
     $(document).on('keyup', '.bs-searchbox input', function (e) {
       
         var searchData = e.target.value;
@@ -49,6 +48,21 @@ $(function (){
                 $("#select-city").val(city.name)
             });
             $("#select-city").selectpicker("refresh");
+        });
+    });
+})
+
+$(function (){
+    $(document).on('keyup', '.bs-searchbox input', function (e) {
+      
+        var searchData = e.target.value;
+        $.get('/city/search?name=' + searchData, function (cities){
+            $("#ad_city option:not(:first)").remove();
+            cities.forEach(function (city){
+                $('#ad_city').append('<option value="'+city.id+'">'+city.name+'</option>');
+                $("#ad_city").val(city.name)
+            });
+            $("#ad_city").selectpicker("refresh");
         });
     });
 })

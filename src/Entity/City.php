@@ -56,6 +56,11 @@ class City
         return $this->name;
     }
 
+    public function setId($id): ?int
+    {
+        return $this->id=$id;
+    }
+    
     public function setName(string $name): self
     {
         $this->name = $name;
