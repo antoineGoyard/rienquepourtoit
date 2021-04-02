@@ -70,17 +70,38 @@ class AdController extends AbstractController
      */
     public function search(Request $request,AdRepository $adRepository): Response
     {
-
+        
         $minPrice = $request->get('minPrice');
         $maxPrice = $request->get('maxPrice');
-        $adType = $request->get('ad-type');
+        $adHouseType = $request->get('adHouseType');
         $adCity = $request->get('city');
+        $adType = $request->get('adType');
 
         return $this->render('ad/search.html.twig', [
-            'ads' => $adRepository->findBySearch($adType,$maxPrice,$minPrice,$adCity),
+            'ads' => $adRepository->findBySearch($adHouseType,$maxPrice,$minPrice,$adCity,$adType),
         ]);
      
     }
+
+      /**
+     * @Route("/full/search", name="ad_full_search", methods={"GET"})
+     */
+    public function fullSearch(Request $request,AdRepository $adRepository,CityRepository $cityRepository): Response
+    {
+        $distance = $request->get('distance');
+        $minPrice = $request->get('minPrice');
+        $maxPrice = $request->get('maxPrice');
+        $adHouseType = $request->get('adHouseType');
+        $adCity = $request->get('city');
+        $adType = $request->get('adType');
+        $city = $cityRepository->find($adCity);
+        return $this->render('ad/search.html.twig', [
+            'ads' => $adRepository->findByFullSearch($adHouseType,$maxPrice,$minPrice,$city,$adType,$distance),
+        ]);
+     
+    }
+
+
 
     /**
      * @Route("/{id}", name="ad_show", methods={"GET"})

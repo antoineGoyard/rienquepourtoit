@@ -23,9 +23,14 @@
     <a class ="a-nav-lm" href="#">Politique de confidentialité</a>
 
   {% elseif app.user.roles[0] == 'ROLE_MODERATOR' %}
-    
     <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
-    <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
+    <a class ="a-nav" href="{{ path ('app_dash_board_admin') }}"><i class="fas fa-sign-out-alt"></i>Gestion </a>
+  {% endif %}
+
+
+  {% elseif app.user.roles[0] == 'ROLE_Administrator' %}
+    <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
+    <a class ="a-nav" href="{{ path ('app_dash_board_moderator') }}"><i class="fas fa-sign-out-alt"></i>Gestion </a>
   {% endif %}
 
 

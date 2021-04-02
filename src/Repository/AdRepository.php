@@ -49,20 +49,41 @@ class AdRepository extends ServiceEntityRepository
     }
     */
 
-    public function findBySearch($type,$max,$min,$city)
+    public function findBySearch($houseType,$max,$min,$city,$type)
     {
+        
         return $this->createQueryBuilder('ad')
         ->join('ad.city','c')
         ->join('ad.house_type', 'h')
-        ->where('h.name = :type')
-        ->andWhere('ad.price <= :maxPrice','ad.price >= :minPrice','c.id =:city')
+        ->where('h.name = :houseType')
+        ->andWhere('ad.price <= :maxPrice','ad.price >= :minPrice','c.id =:city','ad.ad_type = :adType')
         ->setParameter('minPrice', $min)
         ->setParameter('maxPrice', $max)
-        ->setParameter('type', $type)
+        ->setParameter('houseType', $houseType)
         ->setParameter('city', $city)
+        ->setParameter('adType', $type)
             ->getQuery()
             ->getResult()
         ;
     }
-
+    public function findByFullSearch($houseType,$max,$min,$city,$type,$distance)
+    {
+        return $this->createQueryBuilder('ad')
+        ->join('ad.city','c')
+        ->join('ad.house_type', 'h')
+        ->addSelect('(6353 * 2 * ASIN(SQRT( POWER(SIN((ad.latitude - :cityLat) *  pi()/180 / 2), 2) +COS(ad.latitude * pi()/180) * COS(:cityLat* pi()/180) * POWER(SIN((ad.longitude - :cityLong) * pi()/180 / 2), 2) ))) AS HIDDEN distance')
+        ->where('h.name = :houseType')
+        ->andWhere('ad.price <= :maxPrice','ad.price >= :minPrice','ad.ad_type = :adType')
+        ->andHaving('distance <= :dist')
+        ->setParameter('minPrice', $min)
+        ->setParameter('maxPrice', $max)
+        ->setParameter('houseType', $houseType)
+        ->setParameter('cityLat', $city->getLatitude())
+        ->setParameter('cityLong', $city->getLongitude())
+        ->setParameter('adType', $type)
+        ->setParameter('dist', $distance)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

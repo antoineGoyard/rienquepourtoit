@@ -15,12 +15,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('password')
             ->add('phone')
             ->add('pseudo')
             ->add('picture', EntityType::class,[
                 'class'=>Picture::class,
-                'choice_label' => 'source',
+                'choice_label' => 'name',
             ])
         ;
     }

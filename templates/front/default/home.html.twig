@@ -6,10 +6,12 @@
 {% block body %}
     <div id="main-div">
         <div id="main-div-form" class="container" >
-        <form action="{{ path ('ad_search') }}" method="GET">
+        <form action="{{ path ('ad_full_search') }}" method="GET">
 
             <div class="form-group text-center">
-            
+            {#
+             <input type="number" name='distance' value='distance'>distance
+            #}
                 <h3 class="homeForm">Recherche rapide</h3>
                 <div class="btn-group btn-group-toggle col-md-12 homeForm" data-toggle="buttons">
                     <label class="btn btn-danger col-md-6">
@@ -43,7 +45,6 @@
                        <option value="" disabled selected>Choisir une ville</option>
                 </select>
                  <button type="submit" class="btn btn-danger homeForm">Rechercher</button>
-
             </div>
         </form>
         </div>

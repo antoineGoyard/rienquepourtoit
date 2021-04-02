@@ -1,42 +1,4 @@
-/*$(function (){
-    $('#search-input').on('keyup', function() {
-        var value = $(this).val();
-        $.get('/location/city?name=' + value, function (articles){ 
-            $('#result').empty();
-            articles.forEach(function (article){
-              
-                $('#result').append("<li>" + article.nom+ "</li>")
-            });
-        });
-    });
-})
-*/
-
-/*
-$(function (){
-    var timeout = null;
-    $('.chosen-search-input').on('keyup', function() {
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-        var value = $('.chosen-search-input').val();
-        
-            $.get('/location/city?name=' + value, function (articles){ 
-                
-                $('.test1').remove();
-                
-                articles.forEach(function (article){
-                    console.log(article);
-                   
-                
-                });
-                $('.chosen-select').trigger("chosen:updated");
-            });
-        }, 1500);
-
-    });
-})
-*/
-
+// Function for home page
 $(function (){
     $(document).on('keyup', '.bs-searchbox input', function (e) {
       
@@ -52,6 +14,7 @@ $(function (){
     });
 })
 
+// Function for ad new
 $(function (){
     $(document).on('keyup', '.bs-searchbox input', function (e) {
       

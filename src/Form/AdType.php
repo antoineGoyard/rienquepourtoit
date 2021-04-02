@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\HouseType;
-use App\Entity\City;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -50,7 +49,7 @@ class AdType extends AbstractType
                 'choice_label' => 'name',
                 'attr'=>['class'=>'selectpicker','data-live-search' => true],
                 'label' => "Ville de l'annonce : ",
-                'placeholder' => 'placeholder',
+                'placeholder' => 'Villes de France',
                 'mapped' => false,
             ])
 
