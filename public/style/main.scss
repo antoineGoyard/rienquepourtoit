@@ -1,13 +1,14 @@
+//COLOR 
+
 $primary-text-color: #f0f0f0;
-$select-text-color: #CC2222;
+$select-text-color: #FF0C0C;
 $primary-color: #212121;
 
-.alpha { color: $primary-color; }
 
 body{
   font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .sidenav {
     height: 100%;
@@ -89,7 +90,7 @@ body{
     margin-bottom: 10%;
     width: 100%;
     height: 25%;
-    background-image: url(../img/navbar-back.jpg);
+    background-image:linear-gradient(0deg, rgba(11, 11, 11, 0.5) 4%, rgba(222, 222, 222, 0.3) 98%), url(../img/navbar-back.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -124,22 +125,26 @@ body{
 .hidden{
   display: none;
 }
+.visibility{
+  visibility: hidden;
+}
 
 
 
 #main-div{
   width: 100%;
   height: 70vh;
-  background-image: url(../img/main-div.jpg);
+  background-image: linear-gradient(0deg, rgba(11, 11, 11, 0.3) 4%, rgba(222, 222, 222, 0.1) 98%), url(../img/main-div.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 
 .container { width:95%;max-width:980px;padding:1% 2%;margin:0 auto }
 #lat, #lon { text-align:right }
-#map { width:100%;height:300px;padding:0;margin:0; }
+#map { width:100%;height:250px;padding:0;margin:0; }
 .address { cursor:pointer }
 .address:hover { color:#AA0000;text-decoration:underline }
 
@@ -159,6 +164,143 @@ body{
 .testimg{
   object-fit: cover;
   object-position: center;
-  width: 200px;
-  height: 200px;
+}
+.card-img-top {
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sep{
+  color:red;
+}
+
+.card-title
+{
+  margin-top: .75rem;
+  color: $primary-color;
+}
+
+.card-text{
+  margin-bottom: .75rem;
+  color: $primary-color;
+}
+
+.card-text:last-child{
+  margin-bottom: .75rem;
+}
+
+.card-body{
+  background-color:$primary-text-color;
+  z-index: 1;
+}
+
+.card{
+  border: none;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: 5vh 5vw;
+box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.22);
+background-color: $primary-text-color;
+}
+.card-img-top{
+  
+  z-index: 2;
+}
+
+.link-full-ad{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+.carousel-picture{
+  width: 100%;
+  height: 60vh;
+  object-fit:cover;
+  object-position:center;
+}
+
+.ad-hr{
+  width: 50px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 10px 0 30px 0;
+  background-color: #FF0C0C;
+}
+
+.ad-h3{
+  margin-top: 30px;
+}
+.ad-hr-home{
+  width: 50px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 10px 0 30px 5vw;
+  background-color: #FF0C0C;
+}
+.form-control:focus {
+  border-color: #FF0000;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+.ad-h3-home{
+  margin-left: 5vw;
+  margin-top: 30px;
+}
+
+#ad-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin:5px 0 5px 0;
+  p{
+    margin: 5px 0 5px 0;
+    padding: 0;
+  }
+}
+
+.icon{
+  margin:0;
+  font-size:25px;
+  width:40px;
+  color: #212121;
+  margin-right: 20px;
+}
+
+//div main
+
+
+
+
+// Home Form
+
+#main-div-form{
+  background-color: rgb(235, 235, 235);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 40%;
+  border-radius: 5px;
+  
+}
+
+@media only all and (max-width: 768px) {
+  #main-div-form{
+    width: 80%;
+  }
+}
+
+.homeForm{
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
+//form home
+
+.btn-group
+{
+  padding: 0 !important;
 }

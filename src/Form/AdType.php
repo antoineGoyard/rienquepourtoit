@@ -2,21 +2,16 @@
 
 namespace App\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use App\Form\AdSupplementType;
 use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\User;
-use App\Entity\AdSupplement;
 use App\Entity\HouseType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class AdType extends AbstractType
 {
@@ -50,13 +45,13 @@ class AdType extends AbstractType
                 'label' => 'Description courte'
                 ])
 
-            ->add('city', ChoiceType::class,[
-                'label' => "Ville de l'annonce ",
-                'attr' => ['class' => 'chosen-select '],
-                'choices'  =>[
-                    '' => "",
-                    ],
-                ])
+            ->add('city', ChoiceType::class, [
+                'choice_label' => 'name',
+                'attr'=>['class'=>'selectpicker','data-live-search' => true],
+                'label' => "Ville de l'annonce : ",
+                'placeholder' => 'Villes de France',
+                'mapped' => false,
+            ])
 
             ->add('address')
 
@@ -65,9 +60,6 @@ class AdType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Type de bien',
             ])
-
-        
-         
         ;
         $builder->get('city')->resetViewTransformers();
     }

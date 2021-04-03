@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\City;
 use DateTime;
 use App\Entity\Ad;
 use App\Entity\Picture;
 use App\Form\AdType;
 use App\Form\AdEditType;
 use App\Repository\AdRepository;
+use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,17 +36,20 @@ class AdController extends AbstractController
     /**
      * @Route("/new", name="ad_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,CityRepository $cityRepository): Response
     {
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
-        $form->handleRequest($request);
+        $form->handleRequest($request);   
+      
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
-         
-
-
             $ad->setPublished(false);
+
+            $city = $cityRepository->findOneBy(['id'=>$form->get('city')->getData()]);
+            $ad->setCity( $city);
+            
             $ad->setCreatedAt(new DateTime('now'));
             $ad->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
@@ -60,6 +65,44 @@ class AdController extends AbstractController
         ]);
     }
 
+      /**
+     * @Route("/search", name="ad_search", methods={"GET"})
+     */
+    public function search(Request $request,AdRepository $adRepository): Response
+    {
+        
+        $minPrice = $request->get('minPrice');
+        $maxPrice = $request->get('maxPrice');
+        $adHouseType = $request->get('adHouseType');
+        $adCity = $request->get('city');
+        $adType = $request->get('adType');
+
+        return $this->render('ad/search.html.twig', [
+            'ads' => $adRepository->findBySearch($adHouseType,$maxPrice,$minPrice,$adCity,$adType),
+        ]);
+     
+    }
+
+      /**
+     * @Route("/full/search", name="ad_full_search", methods={"GET"})
+     */
+    public function fullSearch(Request $request,AdRepository $adRepository,CityRepository $cityRepository): Response
+    {
+        $distance = $request->get('distance');
+        $minPrice = $request->get('minPrice');
+        $maxPrice = $request->get('maxPrice');
+        $adHouseType = $request->get('adHouseType');
+        $adCity = $request->get('city');
+        $adType = $request->get('adType');
+        $city = $cityRepository->find($adCity);
+        return $this->render('ad/search.html.twig', [
+            'ads' => $adRepository->findByFullSearch($adHouseType,$maxPrice,$minPrice,$city,$adType,$distance),
+        ]);
+     
+    }
+
+
+
     /**
      * @Route("/{id}", name="ad_show", methods={"GET"})
      */
@@ -69,6 +112,8 @@ class AdController extends AbstractController
             'ad' => $ad,
         ]);
     }
+
+    
 
     /**
      * @Route("/{id}/edit", name="ad_edit", methods={"GET","POST"})
@@ -98,7 +143,7 @@ class AdController extends AbstractController
     public function delete(Request $request, Ad $ad): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ad->getId(), $request->request->get('_token'))) {
-            
+
             $entityManager = $this->getDoctrine()->getManager();
 
             foreach ( $ad->getPictures() as $picture){
@@ -140,5 +185,9 @@ class AdController extends AbstractController
         }
     }
 
+
+  
+
+    
      
 }

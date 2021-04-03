@@ -1,50 +1,31 @@
-/*$(function (){
-    $('#search-input').on('keyup', function() {
-        var value = $(this).val();
-        $.get('/location/city?name=' + value, function (articles){ 
-            $('#result').empty();
-            articles.forEach(function (article){
-              
-                $('#result').append("<li>" + article.nom+ "</li>")
+// Function for home page
+$(function (){
+    $(document).on('keyup', '.bs-searchbox input', function (e) {
+      
+        var searchData = e.target.value;
+        $.get('/city/search?name=' + searchData, function (cities){
+            $("#select-city option:not(:first)").remove();
+            cities.forEach(function (city){
+                $('#select-city').append('<option value="'+city.id+'">'+city.name+'</option>');
+                $("#select-city").val(city.name)
             });
+            $("#select-city").selectpicker("refresh");
         });
     });
 })
-*/
 
-
+// Function for ad new
 $(function (){
-    var timeout = null;
-    $('.chosen-search-input').on('keyup', function() {
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-        var value = $('.chosen-search-input').val();
-        
-            $.get('/location/city?name=' + value, function (articles){ 
-                
-                $('.test1').remove();
-                
-                articles.forEach(function (article){
-                    console.log(article);
-                    $('.chosen-select').append("<option class='test1' value='"+ article.nom+"'>"+ article.nom+"</option>");
-                
-                });
-                $('.chosen-select').trigger("chosen:updated");
+    $(document).on('keyup', '.bs-searchbox input', function (e) {
+      
+        var searchData = e.target.value;
+        $.get('/city/search?name=' + searchData, function (cities){
+            $("#ad_city option:not(:first)").remove();
+            cities.forEach(function (city){
+                $('#ad_city').append('<option value="'+city.id+'">'+city.name+'</option>');
+                $("#ad_city").val(city.name)
             });
-        }, 1500);
-
+            $("#ad_city").selectpicker("refresh");
+        });
     });
-
 })
-
-
-
-
-
-$(function(){
-    $( '.chosen-select' ).on( 'change', function() {
-        $('#ad_city').val( $( '.chosen-select' ).val() );
-
-    } );
-})
-

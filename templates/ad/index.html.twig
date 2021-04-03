@@ -36,7 +36,7 @@
                 <td>{{ ad.adType }}</td>
                 <td>{{ ad.shortContent }}</td>
                 <td>{{ ad.createdAt ? ad.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ ad.city }}</td>
+                <td>{{ ad.city.name }}</td>
                 <td>{{ ad.address }}</td>
                 {% if ad.supplement == null %}
                     <td>Vide </td>
@@ -59,3 +59,4 @@
 
     <a href="{{ path('ad_new') }}">Create new</a>
 {% endblock %}
+

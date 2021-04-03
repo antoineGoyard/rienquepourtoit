@@ -1,13 +1,28 @@
 function openNav() {
-  document.getElementById("mySidenav").style.width = "300px";
-                $("#nav-front").addClass("hidden");
+                $("#mySidenav").css('width','300px');
+                $("#nav-front h1").addClass("visibility");
+                $("#burger").addClass("visibility");
+                $("#search-main").addClass("visibility");
+  }
+  
+  function closeNav() {
+ 
+    $("#mySidenav").css('width','0px');
+    $("#nav-front h1").removeClass("visibility");
+    $("#burger").removeClass("visibility");
+    $("#search-main").removeClass("visibility");
+    
+  }
+
+
+
                 // document.body.classList.add("my-mask");
                 // setTimeout(function(){
                 //     document.getElementById("side-nav").classList.remove("none");
                 //     document.getElementById("contact").classList.remove("none");
                 // },350);
                 
-
+/*
                 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                 if (isMobile) {
                     document.getElementById("mySidenav").style.width = "70%";
@@ -23,11 +38,4 @@ function openNav() {
                     document.getElementsByClassName("a-nav-lm")[2].style.fontSize = "2rem";
 
             }
-  }
-  
-  function closeNav() {
- 
-    document.getElementById("mySidenav").style.width = "0";
-    $("#nav-front").removeClass("hidden");
-    
-  }
+  */

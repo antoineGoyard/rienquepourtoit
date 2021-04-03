@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/layout.html.twig' %}
 
 {% block title %}New Ad{% endblock %}
 
@@ -8,6 +8,11 @@
     
     {{ include('ad/_form.html.twig') }}
 
+  
     <a href="{{ path('ad_index') }}">back to list</a>
 {% endblock %}
 
+
+{% block javascripts %}
+    <script src= "{{asset('js/map.js')}}"></script>    
+{% endblock %}
