@@ -1,8 +1,9 @@
-function openNav() {
-                $("#mySidenav").css('width','300px');
-                $("#nav-front h1").addClass("visibility");
-                $("#burger").addClass("visibility");
-                $("#search-main").addClass("visibility");
+function openNav() 
+{
+    $("#mySidenav").css('width','300px');
+    $("#nav-front h1").addClass("visibility");
+    $("#burger").addClass("visibility");
+    $("#search-main").addClass("visibility");
   }
   
   function closeNav() {
@@ -14,6 +15,17 @@ function openNav() {
     
   }
 
+  function openSearch() 
+  {
+      $("#fullSearch").css('height', '80vh');
+      $("#fullSearchClose").removeClass("visibility");
+
+  }
+  function closeSearch() 
+  {
+      $("#fullSearch").css('height', '0vh');
+      $("#fullSearchClose").addClass("visibility");
+  }
 
 
                 // document.body.classList.add("my-mask");

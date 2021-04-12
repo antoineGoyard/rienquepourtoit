@@ -11,6 +11,7 @@ use App\Form\AdType;
 use App\Form\AdEditType;
 use App\Repository\AdRepository;
 use App\Repository\CityRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,15 +71,24 @@ class AdController extends AbstractController
      */
     public function search(Request $request,AdRepository $adRepository): Response
     {
+        if (($request->get('minPrice'))=="") {
+            $minPrice = 0;
+        } else {
+            $minPrice = $request->get('minPrice');
+        }
+
+        if (($request->get('maxPrice'))=="") {
+            $maxPrice = 1000000;
+        } else {
+            $minPrice = $request->get('maxPrice');
+        }
         
-        $minPrice = $request->get('minPrice');
-        $maxPrice = $request->get('maxPrice');
         $adHouseType = $request->get('adHouseType');
-        $adCity = $request->get('city');
+        $city = $request->get('city');
         $adType = $request->get('adType');
 
         return $this->render('ad/search.html.twig', [
-            'ads' => $adRepository->findBySearch($adHouseType,$maxPrice,$minPrice,$adCity,$adType),
+            'ads' => $adRepository->findBySearch($adHouseType,$maxPrice,$minPrice,$city,$adType),
         ]);
      
     }
@@ -88,23 +98,60 @@ class AdController extends AbstractController
      */
     public function fullSearch(Request $request,AdRepository $adRepository,CityRepository $cityRepository): Response
     {
-        $distance = $request->get('distance');
-        $minPrice = $request->get('minPrice');
-        $maxPrice = $request->get('maxPrice');
+       
+
+        if (($request->get('minPrice'))=="") {
+            $minPrice = 0;
+        } else {
+            $minPrice = $request->get('minPrice');
+        }
+
+        if (($request->get('maxPrice'))=="") {
+            $maxPrice = 1000000;
+        } else {
+            $maxPrice = $request->get('maxPrice');
+        }
+
+        if (($request->get('roomNumber'))=="" || ($request->get('roomNumber'))==0) {
+            $roomNumber = 0;
+        } else {
+            $roomNumber = $request->get('roomNumber');
+        }
+
+        if (($request->get('surface'))=="" || ($request->get('surface'))==0) {
+            $surface = 0;
+        } else {
+            $surface = $request->get('surface');
+        }
+
+        if (($request->get('bathroomNumber'))=="" || ($request->get('bathroomNumber'))==0) {
+            $bathroom = 0;
+        } else {
+            $bathroom = $request->get('bathroomNumber');
+        }
         $adHouseType = $request->get('adHouseType');
-        $adCity = $request->get('city');
         $adType = $request->get('adType');
-        $city = $cityRepository->find($adCity);
-        return $this->render('ad/search.html.twig', [
-            'ads' => $adRepository->findByFullSearch($adHouseType,$maxPrice,$minPrice,$city,$adType,$distance),
-        ]);
+        $distance = $request->get('distance');
+     
+        if (($request->get('distance'))=="" || ($request->get('distance'))==0) {
+            $city = $request->get('city');
+            return $this->render('ad/search.html.twig', [
+                'ads' => $adRepository->findByFullSearch2($adHouseType,$maxPrice,$minPrice,$city,$adType,$roomNumber,$surface,$bathroom),
+            ]);
+        } else {
+            $adCity = $request->get('city');
+            $city = $cityRepository->find($adCity);
+            return $this->render('ad/search.html.twig', [
+                'ads' => $adRepository->findByFullSearch1($adHouseType,$maxPrice,$minPrice,$city,$adType,$distance,$roomNumber,$surface,$bathroom),
+            ]);
+        }
      
     }
 
 
 
     /**
-     * @Route("/{id}", name="ad_show", methods={"GET"})
+     * @Route("/show/{id}", name="ad_show", methods={"GET"})
      */
     public function show(Ad $ad): Response
     {
@@ -112,8 +159,16 @@ class AdController extends AbstractController
             'ad' => $ad,
         ]);
     }
-
-    
+    /**
+     * @Route("/user", name="ad_user_show", methods={"GET"})
+     */
+    public function userShow(AdRepository $adRepository): Response
+    {
+        $user = $this->getUser();
+        return $this->render('user/userAd.html.twig', [
+            'ads' => $adRepository->findBy(['user'=> $user->getId()]),
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="ad_edit", methods={"GET","POST"})

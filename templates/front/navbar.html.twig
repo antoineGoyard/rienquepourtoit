@@ -11,9 +11,8 @@
 
   {% elseif app.user.roles[0] == 'ROLE_USER' %}
     <a class ="a-nav" href="{{ path('user_show', {'id': app.user.id}) }}"><i class="fas fa-user-alt"></i>Mon compte</a>
-    <a class ="a-nav"  href="#"><i class="fas fa-calendar-alt"></i>Visite(s)</a>
     <a class ="a-nav" href="#"><i class="fas fa-envelope"></i>Message(s)</a>
-    <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
+    <a class ="a-nav" href="{{ path ('ad_user_show')}}"><i class="fas fa-home"></i>Annonce(s)</a>
     <a class ="a-nav" href="#"><i class="fas fa-search"></i>Recherche</a>
     <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
 
@@ -23,14 +22,13 @@
     <a class ="a-nav-lm" href="#">Politique de confidentialité</a>
 
   {% elseif app.user.roles[0] == 'ROLE_MODERATOR' %}
+    
     <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
-    <a class ="a-nav" href="{{ path ('app_dash_board_admin') }}"><i class="fas fa-sign-out-alt"></i>Gestion </a>
-  {% endif %}
-
-
-  {% elseif app.user.roles[0] == 'ROLE_Administrator' %}
+    <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
+  {% elseif app.user.roles[0] == 'ROLE_ADMINISTRATOR' %}
+    
     <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
-    <a class ="a-nav" href="{{ path ('app_dash_board_moderator') }}"><i class="fas fa-sign-out-alt"></i>Gestion </a>
+    <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
   {% endif %}
 
 
@@ -38,6 +36,64 @@
 
 <nav id="nav-front"class="navbar navbar-dark bg-dark">
   <span id="burger" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  <h1>rienquepourtoit</h1>
-  <a  href="#"><i id ="search-main"class="fas fa-search"></i></a>
+  <a href="{{ path ('home') }}"><h1>rienquepourtoit</h1></a>
+  <div>
+    <a href="{{path ('ad_new')}}"><i id ="create-main"class="far fa-plus-square"></i>Création</a>
+    <a href="#" onclick="openSearch()"><i id ="search-main"class="fas fa-search"></i>Recherche</a>
+  </div>
 </nav>
+
+<div id="fullSearch">
+  <a href="javascript:void(0)" class="visibility" id="fullSearchClose" onclick="closeSearch()"><i class="fas fa-times"></i></a>
+  <h2>Recherche avancée</h2>
+  <div id="main-div-form" class="container" >
+    <form action="{{ path ('ad_full_search') }}" method="GET">
+      <div class="form-group text-center">
+          <h2>Recherche avancée</h2>
+          <select class="form-control selectpicker homeForm" id="select-city" data-live-search="true" name="city" required >
+              <option value="" disabled selected>Choisir une ville</option>
+          </select>
+          <div class="form-row homeForm" >
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Distance autour de la ville" name="distance" >
+            </div>
+             <div class="col">
+              <input type="number" class="form-control" placeholder="Nombre de chambre" name="roomNumber" >
+            </div>
+          </div>
+           <div class="form-row homeForm" >
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Surface minimum" name="surface" >
+            </div>
+             <div class="col">
+              <input type="number" class="form-control" placeholder="Nombre de salle de bain" name="bathroomNumber" >
+            </div>
+          </div>
+          
+          <div class="form-row homeForm" >
+            <div class="col">
+              <input type="number" class="form-control" placeholder="prix minimum" name="minPrice" >
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Prix maximum" name="maxPrice" >
+            </div>
+          </div>
+        <div class="form-row homeForm" >
+            <div class="col">
+              <select name="adHouseType" class="form-control" required >
+                <option value="Maison">Maison</option>
+                <option value="Appartement">Appartement</option>
+              </select>
+            </div>
+            <div class="col">
+              <select name="adType" class="form-control" required >
+                <option value="vente">Vente </option>
+                <option value="location">Location</option>
+              </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger homeForm">Rechercher</button>
+      </div>
+    </form>
+  </div>
+</div>

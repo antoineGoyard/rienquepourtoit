@@ -6,7 +6,7 @@
 {% block body %}
     <div id="main-div">
         <div id="main-div-form" class="container" >
-        <form action="{{ path ('ad_full_search') }}" method="GET">
+        <form action="{{ path ('ad_search') }}" method="GET">
 
             <div class="form-group text-center">
             {#
@@ -34,10 +34,10 @@
 
                 <div class="form-row homeForm" >
                     <div class="col">
-                    <input type="number" class="form-control" placeholder="prix minimum" name="minPrice" required>
+                    <input type="number" class="form-control" placeholder="prix minimum" name="minPrice" >
                     </div>
                     <div class="col">
-                    <input type="number" class="form-control" placeholder="Prix maximum" name="maxPrice" required>
+                    <input type="number" class="form-control" placeholder="Prix maximum" name="maxPrice" >
                     </div>
                 </div>
 
@@ -45,6 +45,7 @@
                        <option value="" disabled selected>Choisir une ville</option>
                 </select>
                  <button type="submit" class="btn btn-danger homeForm">Rechercher</button>
+
             </div>
         </form>
         </div>
@@ -75,6 +76,7 @@
     </div>
 
 {% endblock %}
+
 
 {% block javascript %}
 

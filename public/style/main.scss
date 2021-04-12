@@ -14,7 +14,7 @@ body{
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     top: 0;
     left: 0;
     background-color: $primary-color;
@@ -105,10 +105,10 @@ body{
   }
   
   #nav-front{
-    padding: 0 20%;
+    display: flex;
+    justify-content:space-evenly;
     h1{
       font-family: 'Fredoka One', cursive;
-      margin: 0.5em 0;
       font-size: 22px;
       color: $primary-text-color;
       transition: 0.3s;
@@ -303,4 +303,30 @@ background-color: $primary-text-color;
 .btn-group
 {
   padding: 0 !important;
+}
+
+#footer
+{
+  height: 20vh;
+  background-color: #212121;
+  width: 100%;
+}
+
+#fullSearch{
+    height: 0vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    background-color: $primary-color;
+    overflow-x: hidden;
+    transition: 0.5s;
+    white-space: nowrap;
+}
+#fullSearchClose{
+  position: fixed;
+  top:2%;
+  right:2%;
+  color:white;
+  font-size: 20px;
 }

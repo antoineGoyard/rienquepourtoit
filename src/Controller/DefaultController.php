@@ -13,11 +13,11 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(Request $request): Response
+    public function home(): Response
     {
         $ads = $this->getDoctrine()
         ->getRepository(Ad::class)
-        ->findBy([],['created_at' => 'desc']); //order them by date of creation
+        ->findBy([],['created_at' => 'desc'],5); //order them by date of creation and number
         
         return $this->render('front/default/home.html.twig', [
             'controller_name' => 'DefaultController',
