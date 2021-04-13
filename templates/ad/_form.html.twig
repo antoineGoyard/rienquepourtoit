@@ -8,6 +8,16 @@
      {% if app.request.attributes.get('_route') == 'ad_new' %}
 
         <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.house_type)}}
+            {{ form_widget(form.house_type)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
+            {{ form_label(form.ad_type)}}
+            {{ form_widget(form.ad_type)}}
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.city)}}
             {{ form_widget(form.city)}}
         </div>
@@ -17,9 +27,9 @@
             <input class="form-control" type="text" name="addr" value="" id="addr" />
             <button type="button" class=" btn btn-dark" onclick="addr_search();">Search</button>
         </div>
-
+        <p>selectionner la bonne adresse</p>
         <div class="form-group col-sm-12 col-md-12">
-            <div id="results"></div>
+            <div id="results"> </div>
             <div id="map"></div>
         </div>
 
@@ -49,11 +59,6 @@
         </div>
 
         <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.ad_type)}}
-            {{ form_widget(form.ad_type)}}
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.short_content)}}
             {{ form_widget(form.short_content)}}
         </div>
@@ -63,11 +68,7 @@
             {{ form_widget(form.address)}}
         </div>
 
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.house_type)}}
-            {{ form_widget(form.house_type)}}
-        </div>
-
+     
     {% else %}
     
         <div class="form-group col-sm-12 col-md-6">

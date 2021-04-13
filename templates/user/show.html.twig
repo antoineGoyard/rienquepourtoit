@@ -1,46 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/layout.html.twig' %}
 
 {% block title %}User{% endblock %}
 
 {% block body %}
-{% if app.user.id ==  user.id %}
-    <h1>User</h1>
+    <div class="container">
+      
+        <h3 class="ad-h3-home" >Espace {{user.pseudo}}</h3>
+        <hr class="ad-hr-home">
+        <div id="privateSpace">
+            <img class="profilPicture"  src="{{ asset('/img/arthur.jpeg')  }}" alt="Card image cap">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-                <th>Pseudo</th>
-                <td>{{ user.pseudo }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <p>Email : {{user.email}}</p>
+            <p>Téléphone : +33{{user.phone}}</p>
+            <a href="{{ path('app_forgot_password_request') }}">Changer mot de passe</a>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+            <a href="{{ path('user_edit') }}">Modifier profil</a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
-{% else %}
-<p>Miam<p>
- {% endif %}
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

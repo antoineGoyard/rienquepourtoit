@@ -11,7 +11,7 @@ body {
   z-index: 100;
   top: 0;
   left: 0;
-  background-color: #212121;
+  background-color: #292929;
   overflow-x: hidden;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -109,6 +109,17 @@ hr {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#nav-front :last-child {
+  width: 20%;
+}
+
+#nav-front :first-child {
+  width: 20%;
 }
 
 #nav-front h1 {
@@ -162,6 +173,7 @@ hr {
   height: 250px;
   padding: 0;
   margin: 0;
+  z-index: 1;
 }
 
 .address {
@@ -174,7 +186,6 @@ hr {
 }
 
 #ad-form {
-  background-color: hotpink;
   padding: 0 20%;
 }
 
@@ -208,12 +219,12 @@ hr {
 
 .card-title {
   margin-top: .75rem;
-  color: #212121;
+  color: #292929;
 }
 
 .card-text {
   margin-bottom: .75rem;
-  color: #212121;
+  color: #292929;
 }
 
 .card-text:last-child {
@@ -226,6 +237,7 @@ hr {
 }
 
 .card {
+  z-index: -2 !important;
   border: none;
   overflow: hidden;
   border-radius: 10px;
@@ -233,10 +245,6 @@ hr {
   -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
           box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
   background-color: #f0f0f0;
-}
-
-.card-img-top {
-  z-index: 2;
 }
 
 .link-full-ad {
@@ -316,12 +324,25 @@ hr {
 
 #main-div-form {
   background-color: #ebebeb;
+  padding: 2% 5%;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   width: 40%;
+  border-radius: 5px;
+}
+
+#main-div-form-full {
+  background-color: rgba(235, 235, 235, 0);
+  padding: 2% 5%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 60%;
   border-radius: 5px;
 }
 
@@ -352,7 +373,7 @@ hr {
   position: fixed;
   z-index: 100;
   top: 0;
-  background-color: #212121;
+  background-color: orange;
   overflow-x: hidden;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -364,6 +385,109 @@ hr {
   top: 2%;
   right: 2%;
   color: white;
-  font-size: 20px;
+  font-size: 40px;
+}
+
+.container {
+  min-height: 80vh !important;
+}
+
+#privateSpace {
+  margin: 0 20%;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 60%;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.22);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.22);
+}
+
+#privateSpace a {
+  color: white;
+  background-color: #292929;
+  text-align: center;
+  width: 30%;
+  border: 1px orange solid;
+  border-radius: 5px;
+  margin: 1% 0;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.22);
+          box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.22);
+  padding: 1% 0;
+  text-decoration: none;
+}
+
+#privateSpace a:hover {
+  text-decoration: none;
+}
+
+#privateSpace p {
+  margin: 1% 0;
+  padding: 0;
+}
+
+#privateSpace button {
+  color: white;
+}
+
+#privateSpace form {
+  color: white;
+  background-color: #FF0C0C;
+  text-align: center;
+  width: 30%;
+  border: 1px #FF0C0C solid;
+  border-radius: 5px;
+  margin: 1%;
+  padding: 0;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.22);
+          box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.22);
+}
+
+.profilPicture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.22);
+          box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.22);
+}
+
+#searchCreate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#searchCreate a, #searchCreate a:hover, #searchCreate a:visited, #searchCreate a:active {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#searchCreate :last-child {
+  width: 50%;
+}
+
+#searchCreate :first-child {
+  width: 50%;
 }
 /*# sourceMappingURL=main.css.map */

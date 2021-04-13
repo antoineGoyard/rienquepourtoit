@@ -23,7 +23,7 @@
 
   {% elseif app.user.roles[0] == 'ROLE_MODERATOR' %}
     
-    <a class ="a-nav" href="#"><i class="fas fa-home"></i>Annonce(s)</a>
+    <a class ="a-nav" href="{{ path ('moderator_ad')}}"><i class="fas fa-home"></i>Annonce(s)</a>
     <a class ="a-nav" href="{{ path ('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
   {% elseif app.user.roles[0] == 'ROLE_ADMINISTRATOR' %}
     
@@ -35,22 +35,25 @@
 </div>
 
 <nav id="nav-front"class="navbar navbar-dark bg-dark">
-  <span id="burger" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  <a href="{{ path ('home') }}"><h1>rienquepourtoit</h1></a>
   <div>
-    <a href="{{path ('ad_new')}}"><i id ="create-main"class="far fa-plus-square"></i>Création</a>
-    <a href="#" onclick="openSearch()"><i id ="search-main"class="fas fa-search"></i>Recherche</a>
+    <span id="burger" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+  </div>
+  <div>
+    <a href="{{ path ('home') }}"><h1>rienquepourtoit</h1></a>
+  </div>
+  <div id="searchCreate">
+    <a href="{{path ('ad_new')}}">Créateur d'annonce</a>
+    <a href="#" onclick="openSearch()">Recherche d'annonce</a>
   </div>
 </nav>
 
 <div id="fullSearch">
   <a href="javascript:void(0)" class="visibility" id="fullSearchClose" onclick="closeSearch()"><i class="fas fa-times"></i></a>
-  <h2>Recherche avancée</h2>
-  <div id="main-div-form" class="container" >
+  <div id="main-div-form-full" class="container" >
     <form action="{{ path ('ad_full_search') }}" method="GET">
       <div class="form-group text-center">
           <h2>Recherche avancée</h2>
-          <select class="form-control selectpicker homeForm" id="select-city" data-live-search="true" name="city" required >
+          <select class="form-control selectpicker homeForm" id="fullSearchSelect" data-live-search="true" name="city" required >
               <option value="" disabled selected>Choisir une ville</option>
           </select>
           <div class="form-row homeForm" >

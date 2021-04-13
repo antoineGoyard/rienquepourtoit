@@ -29,3 +29,20 @@ $(function (){
         });
     });
 })
+
+
+// Function fullsearch
+$(function (){
+    $(document).on('keyup', '.bs-searchbox input', function (e) {
+      
+        var searchData = e.target.value;
+        $.get('/city/search?name=' + searchData, function (cities){
+            $("#fullSearchSelect option:not(:first)").remove();
+            cities.forEach(function (city){
+                $('#fullSearchSelect').append('<option value="'+city.id+'">'+city.name+'</option>');
+                $("#fullSearchSelect").val(city.name)
+            });
+            $("#fullSearchSelect").selectpicker("refresh");
+        });
+    });
+})

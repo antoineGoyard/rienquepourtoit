@@ -17,10 +17,11 @@ class UserType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('pseudo')
+            /*
             ->add('picture', EntityType::class,[
                 'class'=>Picture::class,
                 'choice_label' => 'name',
-            ])
+            ])*/
         ;
     }
 

@@ -42,5 +42,6 @@ security:
         - { path: ^/admin, roles: ROLE_MODERATOR }
         - { path: ^/ad/show, roles: IS_AUTHENTICATED_FULLY}
         - { path: ^/ad/new, roles: IS_AUTHENTICATED_FULLY}
+        - { path: ^/moderator, roles: ROLE_MODERATOR }
         
         # - { path: ^/profile, roles: ROLE_USER }
