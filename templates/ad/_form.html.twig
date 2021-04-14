@@ -4,8 +4,7 @@
  
     
 <div id='ad-form' class="form-row"> 
-
-     {% if app.request.attributes.get('_route') == 'ad_new' %}
+  <h1>Création d'annonce - Etape (1/3)</h1>
 
         <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.house_type)}}
@@ -69,49 +68,19 @@
         </div>
 
      
-    {% else %}
-    
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.price,'Prix')}}
-            {{ form_widget(form.price)}}
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.pieces_number)}}
-            {{ form_widget(form.pieces_number)}}
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.surface)}}
-            {{ form_widget(form.surface)}}
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.ad_type)}}
-            {{ form_widget(form.ad_type)}}
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.short_content)}}
-            {{ form_widget(form.short_content)}}
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6">
-            {{ form_label(form.house_type)}}
-            {{ form_widget(form.house_type)}}
-        </div>
-
+  {#
             <h2> Images</h2>
             {% for picture  in ad.pictures %}
               <div>
                 <img src="{{ asset('/uploads/'~picture.name) }}" alt="" width="150">
-                {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
+                 On ajoute un lien permettant de supprimer une image (sera géré en Ajax) 
                 <a href="{{ path('ad_picture_delete', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">Supprimer</a>
             </div>       
-        {# verifier sir la route est "annonce_edit" #}
+        verifier sir la route est "annonce_edit" 
 
             {% endfor %}
      {% endif %}
+     #}
         
      <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
     </div>

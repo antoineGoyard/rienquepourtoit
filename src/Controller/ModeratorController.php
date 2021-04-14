@@ -29,4 +29,16 @@ class ModeratorController extends AbstractController
         ]);
     }
 
+      /**
+     * @Route("/{id}/change-status", name="ad_change_status", methods={"GET"})
+     */
+    public function changeStatus(Ad $ad): Response 
+    {
+        $ad->setpublished(true);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('moderator_ad');
+    }   
+
+
+
 }

@@ -30,6 +30,9 @@
                     </div>  
                 </div>
             </a>
+            <a href="{{ path('ad_edit', {'id': ad.id}) }}">Modification principale</a>
+            <a href="{{ path('ad_supplement_edit', {'id': ad.supplement.id}) }}">Modification secondaire</a>
+            <a href="{{ path('picture_new_ad', {'id': ad.id}) }}">Modification photo</a>
             {% endif %}
         {% endfor %}
         <h4 class="ad-h3-home" >Annonce(s) en attente de validation </h4>
@@ -53,6 +56,9 @@
                     </div>  
                 </div>
             </a>
+             <a href="{{ path('ad_edit', {'id': ad.id}) }}">Modification principale</a>
+             <a href="{{ path('ad_supplement_edit', {'id': ad.supplement.id}) }}">Modification secondaire</a>
+             <a href="{{ path('picture_new_ad', {'id': ad.id}) }}">Modification photo</a>
             {% endif %}
         {% endfor %}
     </div>

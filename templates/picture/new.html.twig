@@ -1,12 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/layout.html.twig' %}
 
 {% block title %}New Picture{% endblock %}
 
 {% block body %}
-    <h1>Create new Picture</h1>
+<div class="container">
+    <h1>Photo de l'annonce - Etape (3/3)</h1>
 
     {{ include('picture/_form.html.twig') }}
 
     <a href="{{ path('picture_index') }}">back to list</a>
+</div>
 {% endblock %}
 
