@@ -210,7 +210,7 @@ class AdController extends AbstractController
             
         }
 
-        return $this->redirectToRoute('ad_index');
+        return $this->redirectToRoute('ad_user_show');
     }
 
     /**
