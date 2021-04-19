@@ -1,0 +1,106 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title %}Annonce-{{ad.houseType.name}}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <p class="hidden" id="lon">{{ad.longitude}}</p>
+    <p class= "hidden" id="lat">{{ad.latitude}}</p>
+
+    <h3 class="ad-h3" >Photos</h3>
+    <hr class="ad-hr">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+                {% for picture  in ad.pictures %}
+                    {% if loop.first == true %}
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{loop.index0}}" class="active"></li>
+                    {% else %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{loop.index0}}" class=></li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        <div class="carousel-inner">
+            {% for picture  in ad.pictures %}
+                {% if loop.first == true %}
+                    <div class="carousel-item active">
+                {% else %}
+                    <div class="carousel-item">
+                {% endif %}
+                    <img class="d-block w-100 carousel-picture" src="{{ asset('/uploads/'~picture.name) }}" alt="">
+                </div>
+            {% endfor %}  
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <h3 class="ad-h3">À propos</h3>
+    <hr class="ad-hr">
+        <p>{{ad.houseType.name}}</p>
+        <p>Adresse : {{ad.address}}</p>
+        <p>{{ad.adType~' : '}}{{ad.price~'€'}}{% if ad.adType == 'location' %}/mois{% endif %}</p>
+        <div class="row">
+            <div class="col-sm-12 col-md-6" id="ad-info">
+                <p><i class="fas fa-door-open icon"></i>{{ad.piecesNumber~' Pièce(s) '}}</p>
+                <p><i class="fas fa-bed icon"></i>{{ad.supplement.roomsNumber~' Chambre(s) '}}</p>
+                <p><i class="fas fa-ruler-combined icon"></i>{{ad.surface~' m²'}}</p>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div id="map"></div>
+            </div>
+        </div>
+
+    <h3 class="ad-h3">Description du bien</h3>
+    <hr class="ad-hr">
+        <p>{{ad.supplement.longContent|nl2br}}</p>
+
+    <h3 class="ad-h3">Complement</h3>
+    <hr class="ad-hr">
+        {% if ad.supplement.garden == true %}
+            <p><i class="fas fa-tree icon"></i>Dispose d'un jardin</p>
+        {% endif %}
+
+         {% if ad.supplement.energyClass != null %}
+            <p><i class="fas fa-bolt icon"></i>Classe énergétique : {{ad.supplement.energyClass}}</p>
+        {% endif %}
+
+        {% if ad.supplement.bathroom != null %}
+            <p><i class="fas fa-bath icon "></i>{{ad.supplement.bathroom~' Salle(s) de bains '}}</p>
+        {% endif %}
+
+         {% if ad.supplement.wc != null %}
+            <p><i class="fas fa-toilet icon "></i>{{ad.supplement.wc~' toilettes '}}</p>
+        {% endif %}
+
+        {% if ad.supplement.garage == true %}
+            <p><i class="fas fa-warehouse icon"></i>Dispose d'un stationnement pour voiture</p>
+        {% endif %}
+
+        {% if ad.supplement.pool == true %}
+            <p><i class="fas fa-swimming-pool icon"></i>Dispose d'une piscine</p>
+        {% endif %}
+
+        
+        
+
+    <h3 class="ad-h3">Contact</h3>
+    <hr class="ad-hr">
+        <p><i class="fas fa-envelope icon"></i>{{ad.user.email}}</p>
+
+</div>
+ 
+
+  
+{% endblock %}
+
+{% block javascripts %}
+    <script src= "{{asset('js/ad-map.js')}}"></script>    
+{% endblock %}
+

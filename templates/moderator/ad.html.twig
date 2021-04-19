@@ -1,0 +1,37 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+ <div class="container">
+    <h3 class="ad-h3-home" >Annonces(s) en attente </h3>
+    <hr class="ad-hr-home">
+        {% for ad in ads %}  
+            <a class="link-full-ad" href="{{ path('ad_show', {'id': ad.id}) }}">
+                <div class="card ">
+                    <img class="card-img-top "  src="{{ asset('/uploads/'~ad.pictures[0].name)  }}" alt="Card image cap">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title">{{ad.houseType.name~' '}}<span class="sep" >&#x2022;</span>{{' '~ad.piecesNumber~' pièce(s) '}}<span class="sep" >&#x2022;</span>{{' '~ad.surface~'m²'}}</h5>
+                                <p class="card-text">{{ad.price~'€'}}{% if ad.adType == 'location' %}/mois{% endif %}</p>
+                                <p class="card-text">{{ad.city.name}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="card-text">{{ad.shortContent}}</p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </a>
+            <a href="{{ path('ad_change_status', {'id': ad.id}) }}">Publier</a>
+            
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title %}Edition de compte{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Edition de compte</h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    {#<a href="{{ path('user_index') }}">back to list</a>#}
+</div>
+{% endblock %}
