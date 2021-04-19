@@ -1,6 +1,7 @@
 //COLOR 
 
 $primary-text-color: #f0f0f0;
+$second-text-color: #262626;
 $select-text-color: #FF0C0C;
 $primary-color: #F49731;
 $second-color: #e9861d;
@@ -206,12 +207,12 @@ body{
 .card-title
 {
   margin-top: .75rem;
-  color: $primary-color;
+  color: $second-text-color;
 }
 
 .card-text{
   margin-bottom: .75rem;
-  color: $primary-color;
+  color: $second-text-color;
 }
 
 .card-text:last-child{
