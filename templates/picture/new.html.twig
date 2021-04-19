@@ -1,14 +1,33 @@
 {% extends 'front/layout.html.twig' %}
 
-{% block title %}New Picture{% endblock %}
+{% block title %}Photo de l'annonce{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Photo de l'annonce - Etape (3/3)</h1>
+  <div class="container">
+    <h1 class="title-form" >Photo de l'annonce</h1>
 
     {{ include('picture/_form.html.twig') }}
+ </div>
+        <section class="step-indicator">
+        <div class="step step1 active">
+            <div class="step-icon">1</div>
+            <p>Etape 1</p>
+        </div>
 
-    <a href="{{ path('picture_index') }}">back to list</a>
-</div>
+        <div class="indicator-line active"></div>
+
+        <div class="step step2 active">
+            <div class="step-icon">2</div>
+            <p>Etape2</p>
+        </div>
+
+            <div class="indicator-line active"></div>
+
+            <div class="step step3 active">
+                <div class="step-icon">3</div>
+            <p>Etape3</p>
+            </div>
+        </section>
+   
 {% endblock %}
 

@@ -30,13 +30,13 @@
                     </div>  
                 </div>
             </a>
-            <a href="{{ path('ad_edit', {'id': ad.id}) }}">Modification principale</a>
-            <a href="{{ path('ad_supplement_edit', {'id': ad.supplement.id}) }}">Modification secondaire</a>
-            <a href="{{ path('picture_new_ad', {'id': ad.id}) }}">Modification photo</a>
+            <a href="{{ path('ad_edit', {'id': ad.id}) }}"class="btn btn-primary">Modification principale</a>
+            <a href="{{ path('ad_supplement_edit', {'id': ad.supplement.id}) }}"class="btn btn-primary ">Modification secondaire</a>
+            <a href="{{ path('picture_new_ad', {'id': ad.id}) }}"class="btn btn-primary ">Modification photo</a>
             <form method="post" action="{{ path('ad_delete', {'id': ad.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer votre annonce??');">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
-                <button class="btn">Delete</button>
+                <button class="btn btn-primary">Delete</button>
             </form>
 
             {% endif %}
@@ -62,13 +62,13 @@
                     </div>  
                 </div>
             </a>
-             <a href="{{ path('ad_edit', {'id': ad.id}) }}">Modification principale</a>
-             <a href="{{ path('ad_supplement_edit', {'id': ad.supplement.id}) }}">Modification secondaire</a>
-             <a href="{{ path('picture_new_ad', {'id': ad.id}) }}">Modification photo</a>
+             <a href="{{ path('ad_edit', {'id': ad.id}) }}"class="btn btn-primary">Modification principale</a>
+             <a href="{{ path('ad_supplement_edit', {'id': ad.supplement.id}) }}"class="btn btn-primary ">Modification secondaire</a>
+             <a href="{{ path('picture_new_ad', {'id': ad.id}) }}"class="btn btn-primary ">Modification photo</a>
              <form method="post" action="{{ path('ad_delete', {'id': ad.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer votre annonce?');">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
-                <button class="btn">Delete</button>
+                <button class="btn btn-primary">Delete</button>
             </form>
 
             {% endif %}

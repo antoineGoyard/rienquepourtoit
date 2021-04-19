@@ -1,15 +1,34 @@
 {% extends 'front/layout.html.twig' %}
 
-{% block title %}New Ad{% endblock %}
+{% block title %}Nouvelle annonce{% endblock %}
 
 {% block body %}
 
 
-    
+
+    <h1 class="title-form">Création d'annonce</h1>
+
     {{ include('ad/_form.html.twig') }}
 
-{% endblock %}
+   
+        <section class="step-indicator">
+        <div class="step step1 active">
+            <div class="step-icon">1</div>
+            <p>Etape 1</p>
+        </div>
+        <div class="indicator-line active"></div>
+        <div class="step step2">
+            <div class="step-icon">2</div>
+            <p>Etape2</p>
+        </div>
+            <div class="indicator-line"></div>
+            <div class="step step3">
+                <div class="step-icon">3</div>
+            <p>Etape3</p>
+            </div>
+        </section>
 
+{% endblock %}
 
 {% block javascripts %}
     <script src= "{{asset('js/map.js')}}"></script>    

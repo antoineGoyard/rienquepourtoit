@@ -4,7 +4,6 @@
  
     
 <div id='ad-form' class="form-row"> 
-  <h1>Création d'annonce - Etape (1/3)</h1>
 
         <div class="form-group col-sm-12 col-md-6">
             {{ form_label(form.house_type)}}
@@ -24,7 +23,7 @@
         <div class="form-group col-sm-12 col-md-6">
             <label for="addr">Adresse</label>
             <input class="form-control" type="text" name="addr" value="" id="addr" />
-            <button type="button" class=" btn btn-dark" onclick="addr_search();">Search</button>
+            <button type="button" class=" btn btn-dark" onclick="addr_search();">Chercher mon adresse</button>
         </div>
         <p>selectionner la bonne adresse</p>
         <div class="form-group col-sm-12 col-md-12">
@@ -81,8 +80,9 @@
             {% endfor %}
      {% endif %}
      #}
-        
-     <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
+    <div class="col text-center">
+     <button class="btn btn-dark center">{{ button_label|default('Etape suivante') }}</button>
+     </div>
     </div>
 
 

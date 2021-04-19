@@ -6,9 +6,10 @@
     </div>
 
     {% if app.request.attributes.get('_route') == 'picture_new_ad' %}
-            <h2> Images</h2>
+            <h5 class="title-form"> Ajouter une image </h5>
+            <p class="info-form">(minimum 5 photos)</p>
             {% for picture  in newAd.pictures %}
-              <div>
+              <div class="img-add">
                 <img src="{{ asset('/uploads/'~picture.name) }}" alt="" width="150">
                 {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
                 <a href="{{ path('ad_picture_delete', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">Supprimer</a>
@@ -17,8 +18,9 @@
         {% endif %}
     
     <button id="add1" class="btn hidden"> <i class="fas fa-plus-circle add"></i></button>
-    <a href="{{ path ('home') }}"><i class="fas fa-home add"></i></a>
-       
+    <div class="validate">
+        <a href="{{ path ('home') }}"><i class="fas fa-home add"></i>Valider l'annonce</a>
+    </div>
 {{ form_end(form) }}
 
 {% block javascripts %}

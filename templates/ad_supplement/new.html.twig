@@ -1,12 +1,32 @@
 {% extends 'front/layout.html.twig' %}
 
-{% block title %}New AdSupplement{% endblock %}
+{% block title %}Supplément de l'annonce{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Supplément de l'annonce - Etape (2/3)</h1>
 
+    <h1 class="title-form">Supplément de l'annonce</h1>
+    <div class="container">
     {{ include('ad_supplement/_form.html.twig') }}
+    </div>
+        <section class="step-indicator">
+        <div class="step step1 active">
+            <div class="step-icon">1</div>
+            <p>Etape 1</p>
+        </div>
 
-</div>
+        <div class="indicator-line active"></div>
+
+        <div class="step step2 active">
+            <div class="step-icon">2</div>
+            <p>Etape2</p>
+        </div>
+
+            <div class="indicator-line active"></div>
+
+            <div class="step step3">
+                <div class="step-icon">3</div>
+            <p>Etape3</p>
+            </div>
+        </section>
+
 {% endblock %}
